@@ -15,8 +15,6 @@ namespace Assistant.Controllers
             _logger = logger;
         }
 
-        
-
         [HttpGet("_configuration/{clientId}")]
         public IActionResult GetClientRequestParameters([FromRoute]string clientId)
         {

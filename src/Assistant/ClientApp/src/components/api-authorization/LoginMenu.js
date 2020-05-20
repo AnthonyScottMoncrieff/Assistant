@@ -53,7 +53,6 @@ export class LoginMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to={logoutPath} onClick={this.props.navClicked}>Logout</NavLink>
             </NavItem>
         </Fragment>);
-
     }
 
     anonymousView(registerPath, loginPath) {

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Assistant.Models\Assistant.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataHandlers\" />
+  </ItemGroup>
+
 </Project>
