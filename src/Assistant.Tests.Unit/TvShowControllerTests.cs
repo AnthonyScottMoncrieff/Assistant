@@ -1,17 +1,15 @@
 ﻿using Assistant.Controllers;
 using Assistant.DataAccess.DataHandlers.Interfaces;
+using Assistant.Domain.Interfaces;
 using Assistant.Logging.Interfaces;
 using Assistant.Models;
 using Assistant.Models.Entities;
-using Assistant.Utilities.Interfaces;
 using AutoFixture;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Assistant.Tests.Unit

@@ -6,7 +6,6 @@ using AutoFixture;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,13 +51,12 @@ namespace Assistant.Tests.Unit
             _logger.Verify(x => x.AddErrorDetail(It.IsAny<string>()), Times.Never);
             _logger.Verify(x => x.SubmitException(It.IsAny<Exception>()), Times.Never);
             _queryActionHandlers.Verify(x => x.GetTVShowMappingsByUserId(userId), Times.Once);
-            foreach(var mapping in userTVShowMappings)
+            foreach (var mapping in userTVShowMappings)
             {
                 var shows = userTVShowMappings.Select(x => x.TvShow);
                 Assert.True(response.Result.Contains(mapping.TvShow));
             }
         }
-
 
         [Test]
         public async Task GetTvShowsByUserId_Should_Call_Correct_Dependencies_On_Database_Exception()

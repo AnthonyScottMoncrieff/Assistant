@@ -28,7 +28,7 @@ namespace Assistant.Tests.Integration
         public void Setup()
         {
             var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: $"RiskMitigationContextDB{Guid.NewGuid()}")
+                .UseInMemoryDatabase(databaseName: $"AssistantDB{Guid.NewGuid()}")
                 .Options;
             var operationalOptions = Options.Create(new OperationalStoreOptions());
 

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Assistant.DataAccess.DataHandlers.Interfaces;
+﻿using Assistant.DataAccess.DataHandlers.Interfaces;
+using Assistant.Domain.Interfaces;
 using Assistant.Logging.Interfaces;
-using Assistant.Utilities.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Assistant.Controllers
 {

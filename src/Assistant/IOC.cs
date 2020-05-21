@@ -2,10 +2,10 @@
 using Assistant.DataAccess.DataHandlers.ContextActionHandlers.Interfaces;
 using Assistant.DataAccess.DataHandlers.Interfaces;
 using Assistant.DataAccess.DataHandlers.Queries;
+using Assistant.Domain;
+using Assistant.Domain.Interfaces;
 using Assistant.Logging;
 using Assistant.Logging.Interfaces;
-using Assistant.Utilities;
-using Assistant.Utilities.Interfaces;
 using Exceptionless;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +18,8 @@ namespace Assistant
         {
             RegisterExceptionless(config);
             RegisterLogging(services);
-            RegisterDbContectItems(services);
+            RegisterDbContextItems(services);
+            RegisterUtilities(services);
         }
 
         private static void RegisterUtilities(IServiceCollection services)
@@ -26,9 +27,11 @@ namespace Assistant
             services.AddTransient<IUserContextManager, UserContextManager>();
         }
 
-        private static void RegisterDbContectItems(IServiceCollection serviceCollection)
+        private static void RegisterDbContextItems(IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<IQueryActionHandlers, QueryActionHandlers>();
+            serviceCollection.AddTransient<ICommandActionHandlers, CommandActionHandlers>();
+
             serviceCollection.AddTransient<IGetTVShowsByUser, GetTVShowsByUser>();
         }
 

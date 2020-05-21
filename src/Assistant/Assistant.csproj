@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Assistant.DataAccess\Assistant.DataAccess.csproj" />
+    <ProjectReference Include="..\Assistant.Domain\Assistant.Domain.csproj" />
     <ProjectReference Include="..\Assistant.Logging\Assistant.Logging.csproj" />
     <ProjectReference Include="..\Assistant.Models\Assistant.Models.csproj" />
   </ItemGroup>

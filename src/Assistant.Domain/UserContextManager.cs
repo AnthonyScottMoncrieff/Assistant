@@ -1,12 +1,8 @@
-﻿using Assistant.Utilities.Interfaces;
+﻿using Assistant.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace Assistant.Utilities
+namespace Assistant.Domain
 {
     public class UserContextManager : IUserContextManager
     {
