@@ -79,5 +79,24 @@ namespace Assistant.Tests.Unit
             _logger.Verify(x => x.SubmitException(It.IsAny<Exception>()), Times.Once);
             _queryActionHandlers.Verify(x => x.GetTVShowMappingsByUserId(userId), Times.Once);
         }
+
+        [Test]
+        public async Task GetTvShowsByUserId_Should_Call_Correct_Dependencies_On_Null_User()
+        {
+            //Arrange
+            string userId = null;
+
+            //Act
+            var response = await _getTVShowsByUser.GetTvShowsByUserId(userId);
+
+            //Assert
+            Assert.False(response.WasSuccessful);
+            Assert.IsNull(response.Result);
+            Assert.NotNull(response.Message);
+            _logger.Verify(x => x.AddMessageDetail(It.IsAny<string>()), Times.Never);
+            _logger.Verify(x => x.AddErrorDetail(It.IsAny<string>()), Times.Once);
+            _logger.Verify(x => x.SubmitException(It.IsAny<Exception>()), Times.Once);
+            _queryActionHandlers.Verify(x => x.GetTVShowMappingsByUserId(userId), Times.Never);
+        }
     }
 }

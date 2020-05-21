@@ -25,6 +25,8 @@ namespace Assistant.DataAccess.DataHandlers.Queries
         {
             try
             {
+                if (userId == null)
+                    throw new Exception("Unable to obtain user");
                 _logger.AddMessageDetail($"GetTVShowsByUser: Getting shows for user with Id: {userId}");
                 var shows = await _queryActionHandlers.GetTVShowMappingsByUserId(userId);
                 _logger.AddMessageDetail($"GetTVShowsByUser: Retrieved {shows.Count()} shows for user with Id: {userId}");

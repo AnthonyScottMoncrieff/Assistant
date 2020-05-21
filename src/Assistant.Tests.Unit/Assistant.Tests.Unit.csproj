@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Assistant.DataAccess\Assistant.DataAccess.csproj" />
+    <ProjectReference Include="..\Assistant\Assistant.csproj" />
   </ItemGroup>
 
 </Project>

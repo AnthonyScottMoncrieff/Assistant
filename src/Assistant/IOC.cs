@@ -4,6 +4,8 @@ using Assistant.DataAccess.DataHandlers.Interfaces;
 using Assistant.DataAccess.DataHandlers.Queries;
 using Assistant.Logging;
 using Assistant.Logging.Interfaces;
+using Assistant.Utilities;
+using Assistant.Utilities.Interfaces;
 using Exceptionless;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,11 @@ namespace Assistant
             RegisterExceptionless(config);
             RegisterLogging(services);
             RegisterDbContectItems(services);
+        }
+
+        private static void RegisterUtilities(IServiceCollection services)
+        {
+            services.AddTransient<IUserContextManager, UserContextManager>();
         }
 
         private static void RegisterDbContectItems(IServiceCollection serviceCollection)
