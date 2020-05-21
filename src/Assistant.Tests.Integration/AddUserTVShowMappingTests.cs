@@ -1,7 +1,6 @@
 ﻿using Assistant.DataAccess;
 using Assistant.DataAccess.DataHandlers.Commands;
 using Assistant.DataAccess.DataHandlers.ContextActionHandlers;
-using Assistant.DataAccess.DataHandlers.Queries;
 using Assistant.Logging.Interfaces;
 using Assistant.Models.Entities;
 using IdentityServer4.EntityFramework.Options;
@@ -10,8 +9,6 @@ using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Assistant.Tests.Integration

@@ -1,4 +1,5 @@
-﻿using Assistant.DataAccess.DataHandlers.ContextActionHandlers;
+﻿using Assistant.DataAccess.DataHandlers.Commands;
+using Assistant.DataAccess.DataHandlers.ContextActionHandlers;
 using Assistant.DataAccess.DataHandlers.ContextActionHandlers.Interfaces;
 using Assistant.DataAccess.DataHandlers.Interfaces;
 using Assistant.DataAccess.DataHandlers.Queries;
@@ -20,11 +21,17 @@ namespace Assistant
             RegisterLogging(services);
             RegisterDbContextItems(services);
             RegisterUtilities(services);
+            RegisterDomain(services);
         }
 
         private static void RegisterUtilities(IServiceCollection services)
         {
             services.AddTransient<IUserContextManager, UserContextManager>();
+        }
+
+        private static void RegisterDomain(IServiceCollection services)
+        {
+            services.AddTransient<IUserTVShowMappingManager, UserTVShowMappingManager>();
         }
 
         private static void RegisterDbContextItems(IServiceCollection serviceCollection)
@@ -33,6 +40,7 @@ namespace Assistant
             serviceCollection.AddTransient<ICommandActionHandlers, CommandActionHandlers>();
 
             serviceCollection.AddTransient<IGetTVShowsByUser, GetTVShowsByUser>();
+            serviceCollection.AddTransient<IAddUserTVShowMapping, AddUserTVShowMapping>();
         }
 
         private static void RegisterExceptionless(IConfiguration configuration)

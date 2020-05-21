@@ -8,4 +8,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Assistant.DataAccess\Assistant.DataAccess.csproj" />
+    <ProjectReference Include="..\Assistant.Logging\Assistant.Logging.csproj" />
+    <ProjectReference Include="..\Assistant.Models\Assistant.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -23,6 +23,9 @@ namespace Assistant.DataAccess.DataHandlers.Commands
         {
             try
             {
+                if (tvShowMapping.UserId == null)
+                    throw new Exception("Unable to find user");
+
                 _logger.AddMessageDetail($"AddUserTVShowMapping: Attempting to add show mapping with Show Name: {tvShowMapping.TvShow.ShowName} and userid: {tvShowMapping.UserId}");
                 await _commandActionHandlers.AddUserTVShowMappingAsync(tvShowMapping);
                 _logger.AddMessageDetail($"AddUserTVShowMapping: Successfully added show with Name: {tvShowMapping.TvShow.ShowName} and userid: {tvShowMapping.UserId}");

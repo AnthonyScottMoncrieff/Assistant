@@ -6,9 +6,7 @@ using AutoFixture;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Assistant.Tests.Unit
@@ -68,6 +66,25 @@ namespace Assistant.Tests.Unit
             _logger.Verify(x => x.AddErrorDetail(It.IsAny<string>()), Times.Once);
             _logger.Verify(x => x.SubmitException(It.IsAny<Exception>()), Times.Once);
             _commandActionHandlers.Verify(x => x.AddUserTVShowMappingAsync(It.IsAny<UserTVShowMapping>()), Times.Once);
+        }
+
+        [Test]
+        public async Task Add_Should_Call_Correct_Dependencies_On_Null_User_Id()
+        {
+            //Arrange
+            var mapping = _fixture.Create<UserTVShowMapping>();
+            mapping.UserId = null;
+
+            //Act
+            var response = await _userTVShowMapping.Add(mapping);
+
+            //Assert
+            Assert.False(response.WasSuccessful);
+            Assert.IsNotNull(response.Message);
+            _logger.Verify(x => x.AddMessageDetail(It.IsAny<string>()), Times.Never);
+            _logger.Verify(x => x.AddErrorDetail(It.IsAny<string>()), Times.Once);
+            _logger.Verify(x => x.SubmitException(It.IsAny<Exception>()), Times.Once);
+            _commandActionHandlers.Verify(x => x.AddUserTVShowMappingAsync(It.IsAny<UserTVShowMapping>()), Times.Never);
         }
     }
 }
