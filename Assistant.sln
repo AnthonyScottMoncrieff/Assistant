@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assistant.DataAccess", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A6AB0DED-BB68-4D1D-9119-E6012B9B7599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistant.Tests.Unit", "src\Assistant.Tests.Unit\Assistant.Tests.Unit.csproj", "{C2FF10BD-7E89-4CA2-9B3B-27B8CD8B76F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assistant.Tests.Unit", "src\Assistant.Tests.Unit\Assistant.Tests.Unit.csproj", "{C2FF10BD-7E89-4CA2-9B3B-27B8CD8B76F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistant.Tests.Integration", "src\Assistant.Tests.Integration\Assistant.Tests.Integration.csproj", "{892E4283-3067-423D-A5EC-E75D7D221582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assistant.Tests.Integration", "src\Assistant.Tests.Integration\Assistant.Tests.Integration.csproj", "{892E4283-3067-423D-A5EC-E75D7D221582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistant.Logging", "src\Assistant.Logging\Assistant.Logging.csproj", "{E6C9489D-976A-45A2-A85C-442C0451D50B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{892E4283-3067-423D-A5EC-E75D7D221582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{892E4283-3067-423D-A5EC-E75D7D221582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{892E4283-3067-423D-A5EC-E75D7D221582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C9489D-976A-45A2-A85C-442C0451D50B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C9489D-976A-45A2-A85C-442C0451D50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C9489D-976A-45A2-A85C-442C0451D50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C9489D-976A-45A2-A85C-442C0451D50B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
