@@ -25,6 +25,7 @@ namespace Assistant.DataAccess.DataHandlers.Commands
             {
                 _logger.AddMessageDetail($"AddUserTVShowMapping: Attempting to add show mapping with Show Name: {tvShowMapping.TvShow.ShowName} and userid: {tvShowMapping.UserId}");
                 await _commandActionHandlers.AddUserTVShowMappingAsync(tvShowMapping);
+                _logger.AddMessageDetail($"AddUserTVShowMapping: Successfully added show with Name: {tvShowMapping.TvShow.ShowName} and userid: {tvShowMapping.UserId}");
                 return GenerateResponse(tvShowMapping);
             }
             catch (Exception ex)
