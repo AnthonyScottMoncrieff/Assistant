@@ -7,6 +7,7 @@ namespace Assistant.Models.Entities
     {
         [JsonIgnore]
         public int TVShowId { get; set; }
+
         public string ShowName { get; set; }
         public string ShowKey { get; set; }
 

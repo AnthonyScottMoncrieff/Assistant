@@ -6,10 +6,13 @@ namespace Assistant.Models.Entities
     {
         [JsonIgnore]
         public int Id { get; set; }
+
         [JsonIgnore]
         public string UserId { get; set; }
+
         [JsonIgnore]
         public int TVShowId { get; set; }
+
         public TvShow TvShow { get; set; }
     }
 }
