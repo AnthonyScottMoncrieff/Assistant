@@ -12,6 +12,7 @@ namespace Assistant.DataAccess.EntityMappings
             builder.Property(x => x.ShowName).IsRequired();
             builder.Property(x => x.ShowKey).IsRequired();
             builder.Property(x => x.ThumbnailUrl).IsRequired();
+            builder.Property(x => x.Summary).IsRequired();
         }
     }
 }

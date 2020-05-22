@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Assistant.Controllers
 {
-    [Route("api/tvshows")]
     [Authorize]
     [ApiController]
+    [Route("api/tvshows")]
     public class TvShowController : ControllerBase
     {
         private readonly IGetTVShowsByUser _getTVShowsByUser;

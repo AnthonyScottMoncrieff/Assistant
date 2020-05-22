@@ -44,7 +44,8 @@ namespace Assistant.Tests.Integration
                     TVShowId = 1,
                     ShowKey = "show-show",
                     ShowName = "Show Show",
-                    ThumbnailUrl = "URL"
+                    ThumbnailUrl = "URL",
+                    Summary = "Summary"
                 }
             };
 
@@ -66,7 +67,8 @@ namespace Assistant.Tests.Integration
                 {
                     ShowKey = "show-show_show",
                     ShowName = "Show Show Show",
-                    ThumbnailUrl = "URL"
+                    ThumbnailUrl = "URL",
+                    Summary = "Summary"
                 }
             };
 
@@ -92,7 +94,8 @@ namespace Assistant.Tests.Integration
                 {
                     ShowKey = "show-show",
                     ShowName = "Show Show",
-                    ThumbnailUrl = "URL"
+                    ThumbnailUrl = "URL",
+                    Summary = "Summary"
                 }
             };
 
