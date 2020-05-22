@@ -43,7 +43,8 @@ namespace Assistant.Tests.Integration
                 {
                     TVShowId = 1,
                     ShowKey = "show-show",
-                    ShowName = "Show Show"
+                    ShowName = "Show Show",
+                    ThumbnailUrl = "URL"
                 }
             };
 
@@ -64,7 +65,8 @@ namespace Assistant.Tests.Integration
                 TvShow = new TvShow
                 {
                     ShowKey = "show-show_show",
-                    ShowName = "Show Show Show"
+                    ShowName = "Show Show Show",
+                    ThumbnailUrl = "URL"
                 }
             };
 
@@ -89,7 +91,8 @@ namespace Assistant.Tests.Integration
                 TvShow = new TvShow
                 {
                     ShowKey = "show-show",
-                    ShowName = "Show Show"
+                    ShowName = "Show Show",
+                    ThumbnailUrl = "URL"
                 }
             };
 

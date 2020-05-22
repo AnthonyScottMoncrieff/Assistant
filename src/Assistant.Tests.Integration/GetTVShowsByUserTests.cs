@@ -44,7 +44,8 @@ namespace Assistant.Tests.Integration
                 {
                     TVShowId = 1,
                     ShowKey = "show-show",
-                    ShowName = "Show Show"
+                    ShowName = "Show Show",
+                    ThumbnailUrl = "URL"
                 }
             };
 

@@ -11,6 +11,7 @@ namespace Assistant.DataAccess.EntityMappings
             builder.HasKey(x => x.TVShowId);
             builder.Property(x => x.ShowName).IsRequired();
             builder.Property(x => x.ShowKey).IsRequired();
+            builder.Property(x => x.ThumbnailUrl).IsRequired();
         }
     }
 }
