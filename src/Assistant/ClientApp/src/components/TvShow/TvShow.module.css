@@ -1,7 +1,24 @@
 .TvShow {
-    width: 100%;
+    width: 48%;
     cursor: pointer;
     text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 36px;
+    padding: 1%;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    transition: box-shadow 0.2s;
+}
+
+.TvShow:hover{
+    -webkit-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
+    box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
+}
+
+.TvShow:nth-child(2n){
+    margin-left: 2%;
 }
 
 .TvShow img{
@@ -14,6 +31,8 @@
     margin-bottom: 1%;
 }
 
-.ShowDescription{
-
-}
+@media (max-width: 767px) {
+    .TvShow {
+        width: 100%;
+    }
+  }
