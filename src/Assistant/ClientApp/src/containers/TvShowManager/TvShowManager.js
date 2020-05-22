@@ -7,7 +7,7 @@ import classes from './TvShowManager.module.css'
 
 class TvShowManager extends Component{
     componentDidMount () {
-        this.props.onFetchTvShows();
+        this.props.onFetchTvShows(this.props.shows, false);
     }
     
     render(){
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchTvShows: () => dispatch( actions.initTvShows() )
+        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch( actions.initTvShows() )
     };
 };
 
