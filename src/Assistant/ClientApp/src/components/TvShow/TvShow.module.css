@@ -1,14 +1,19 @@
 .TvShow {
     width: 100%;
-    max-height: 400px;
     cursor: pointer;
+    text-align: center;
 }
 
 .TvShow img{
-    max-height: 50px;
-    display: inline-block;
+    margin-bottom: 1%;
 }
 
-.TvShow .show-name{
-    display: inline-block;
+.ShowName{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 1%;
+}
+
+.ShowDescription{
+
 }
