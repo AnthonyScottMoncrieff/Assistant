@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import TVShow from '../../components/TvShow/TvShow'
+import TVShow from '../../components/TvShowComponents/TvShow/TvShow'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
-import classes from './TvShowManager.module.css'
+import classes from './TvShowRangeManager.module.css';
+import { Link } from 'react-router-dom';
 
-class TvShowManager extends Component{
+class TvShowRangeManager extends Component{
     componentDidMount () {
         this.props.onFetchTvShows(this.props.shows, false);
     }
@@ -14,14 +15,14 @@ class TvShowManager extends Component{
         let shows = <Spinner />;
         if(!this.props.loading){
             shows = this.props.shows.map(show => 
-               <TVShow 
-                    key={show.showKey}
-                    thumbnailUrl={show.thumbnailUrl} 
-                    showName={show.showName} 
-                    description={show.summary} /> );
+                <Link className={classes.Link} key={show.showKey} to={`/tv-shows/${show.showKey}`}><TVShow 
+                thumbnailUrl={show.thumbnailUrl} 
+                showName={show.showName} 
+                description={show.summary} /></Link>
+                );
         }
         return (
-            <div className={classes.TvShowManager}>
+            <div className={classes.TvShowRangeManager}>
                 {shows}
             </div>
         )
@@ -41,4 +42,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( TvShowManager );
+export default connect( mapStateToProps, mapDispatchToProps )( TvShowRangeManager );

@@ -4,3 +4,7 @@ export const updateObject = (oldObject, updatedProperties) => {
         ...updatedProperties
     };
 };
+
+export const stripHTMLTags = (input) => {
+    return input.replace(/\<[^>]{1,4}\>/g, "");
+}

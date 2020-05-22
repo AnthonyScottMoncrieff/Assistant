@@ -1,0 +1,21 @@
+.TvShow {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 36px;
+    padding: 1%;
+    border-radius: 5px;
+    transition: box-shadow 0.2s;
+    color: black;
+}
+
+.TvShow img{
+    margin-bottom: 1%;
+}
+
+.ShowName{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 1%;
+}

@@ -1,0 +1,26 @@
+.FullTvShow{
+    position: relative;
+}
+
+.Header{
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.Body{
+    display: inline-block;
+}
+
+.Body img{
+    display: inline-block;
+    max-width: 20%;
+    margin-right: 5%;
+}
+
+.Description{
+    display: inline-block;
+    max-width: 65%;
+    vertical-align: middle;
+}

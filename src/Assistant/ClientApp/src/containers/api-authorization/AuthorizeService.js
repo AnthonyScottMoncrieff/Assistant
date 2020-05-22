@@ -37,6 +37,7 @@ export class AuthorizeService {
               return silentUser && silentUser.access_token
             } catch (err) {
               console.log('Silent login failed to refresh token');
+              this.updateState(null);
             }
           }
         return user && user.access_token;

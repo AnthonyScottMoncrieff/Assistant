@@ -6,7 +6,8 @@ import { Counter } from './containers/Counter/Counter';
 import AuthorizeRoute from './containers/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './containers/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './containers/api-authorization/ApiAuthorizationConstants';
-import TvShowManager from './containers/TvShowManager/TvShowManager';
+import TvShowRangeManager from './containers/TvShowRangeManager/TvShowRangeManager';
+import FullTvShowManager from './containers/FullTvShowManager/FullTvShowManager';
 
 import './custom.css'
 
@@ -18,7 +19,8 @@ export default class App extends Component {
             <Layout>
                 <Route exact path='/' component={Home} />
                 <Route path='/counter' component={Counter} />
-                <AuthorizeRoute path='/tv-shows' component={TvShowManager} />
+                <AuthorizeRoute exact path='/tv-shows' component={TvShowRangeManager} />
+                <AuthorizeRoute exact path='/tv-shows/:showKey' component={FullTvShowManager} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );
