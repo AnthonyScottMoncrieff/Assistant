@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 //import registerServiceWorker from './registerServiceWorker';
 
 import tvShows from './store/reducers/tvShows';
+import episodes from './store/reducers/episodes';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -16,7 +17,8 @@ const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
 const rootReducer = combineReducers({
-    tvShows: tvShows
+    tvShows: tvShows,
+    episodes: episodes
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import authService from '../../containers/api-authorization/AuthorizeService';
 
+/* START TvShow Actions */
 export const setTvShows = (shows) => {
     return {
         type: actionTypes.SET_TVSHOWS,
@@ -45,6 +46,7 @@ export const initTvShows = () => {
                 dispatch(fetchTvShowsFailed())
             })
         })
-        
     }
 }
+/* END TvShow Actions */
+

@@ -3,24 +3,24 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     shows: [],
-    error: false,
-    loading: true
+    tvShowFetchError: false,
+    tvShowsLoading: false
 }
 
 const setTvShows = (state, action) => {
     return updateObject(state, {
         shows: [...action.shows],
-        error: false,
-        loading: false
+        tvShowFetchError: false,
+        tvShowsLoading: false
     })
 }
 
 const fetchTvShowsStarted = (state) => {
-    return updateObject(state, {error: false, loading: true});
+    return updateObject(state, {tvShowFetchError: false, tvShowsLoading: true});
 }
 
 const fetchTvShowsFailed = (state) => {
-    return updateObject(state, {error: true, loading: false});
+    return updateObject(state, {tvShowFetchError: true, tvShowsLoading: false});
 }
 
 const reducer = (state = initialState, action) => {

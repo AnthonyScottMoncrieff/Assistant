@@ -13,7 +13,7 @@ class TvShowRangeManager extends Component{
     
     render(){
         let shows = <Spinner />;
-        if(!this.props.loading){
+        if(!this.props.loading && !this.props.error){
             shows = this.props.shows.map(show => 
                 <Link className={classes.Link} key={show.showKey} to={`/tv-shows/${show.showKey}`}><TVShow 
                 thumbnailUrl={show.thumbnailUrl} 
@@ -21,6 +21,8 @@ class TvShowRangeManager extends Component{
                 description={show.summary} /></Link>
                 );
         }
+        else if(this.props.error)
+            shows = (<div>ERROR</div>);
         return (
             <div className={classes.TvShowRangeManager}>
                 {shows}
@@ -32,7 +34,8 @@ class TvShowRangeManager extends Component{
 const mapStateToProps = state => {
     return {
         shows: state.tvShows.shows,
-        loading: state.tvShows.loading
+        loading: state.tvShows.tvShowsLoading,
+        error: state.tvShows.tvShowFetchError
     };
 };
 

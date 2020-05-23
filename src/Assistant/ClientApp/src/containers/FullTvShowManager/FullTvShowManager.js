@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import FullTvShow from '../../components/TvShowComponents/FullTvShow/FullTvShow';
+import EpisodeManager from '../EpisodeManager/EpisodeManager';
 
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -12,15 +13,19 @@ class FullTvShowManager extends Component{
 
     render(){
         let show = <Spinner />;
+        let episodes = null;
         if(!this.props.tvShowsloading){
-            show = this.props.shows
+            show = (
+                this.props.shows
                 .filter(show => show.showKey === this.props.match.params.showKey)
-                    .map(show => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary}/>)
+                    .map(show => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary}/>))
+            episodes = <EpisodeManager showKey={this.props.match.params.showKey} />
         }
 
         return (
             <Fragment>
                 {show}
+                {episodes}
             </Fragment>
         )
     }
