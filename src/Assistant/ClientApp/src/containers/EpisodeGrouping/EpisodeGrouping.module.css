@@ -1,0 +1,29 @@
+.EpisodeGrouping{
+    position: relative;
+    background-color: rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.EpisodeGrouping:hover{
+    -webkit-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+    box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+}
+
+.Title{
+    font-size: 23px;
+    width: 100%;
+    padding: 5px 0 5px 15px;
+}
+
+.EpisodeCollection{
+    transition: height 0.3s;
+    height: auto;
+    overflow: hidden;
+}
+
+.Collapsed{
+    height: 0;
+}
