@@ -20,14 +20,13 @@ class EpisodeManager extends Component{
     render(){
         let episodeCollection = <Spinner />;
         if(!this.props.episodesLoading && !this.props.error){
-            console.log(this.props.showEpisodes)
             let show = this.props.showEpisodes.filter(x => x.showKey === this.props.showKey)[0];
-            let groupedCollection = groupByShallowProperty(show.episodes, 'season');
-            let sortedCollection = groupedCollection.sort((a, b) => b.key - a.key);
-            episodeCollection = sortedCollection
-                .map(grouping => 
-                    grouping.groupedCollection.sort((a, b) => b.number - a.number)
-                    .map(episode => <Episode key={episode.id} episode={episode} />)).flat()
+            let collection = groupByShallowProperty(show.episodes, 'season')
+                .sort((a, b) => b.key - a.key)
+                .map(g => 
+                    g.groupedCollection.sort((a, b) => b.number - a.number)
+                    .map(e => <Episode key={e.id} episode={e} />)).flat();
+            episodeCollection = collection;
         }
         else if(this.props.error){
             episodeCollection = <div>ERROR</div>

@@ -21,5 +21,7 @@ export const groupByShallowProperty = (collection, property) => {
         grouping.groupedCollection.push(currentValue);
         return accumulator;
     });
-    return reduction["groupings"];
+    var returnValue = [...reduction["groupings"]];
+    reduction["groupings"] = null;
+    return returnValue;
 }
