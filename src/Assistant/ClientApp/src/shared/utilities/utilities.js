@@ -20,8 +20,13 @@ export const groupByShallowProperty = (collection, property) => {
         }
         grouping.groupedCollection.push(currentValue);
         return accumulator;
-    });
+    }, {});
     var returnValue = [...reduction["groupings"]];
     reduction["groupings"] = null;
     return returnValue;
+}
+
+export const toBritishDate = (dateInput) => {
+    let date = new Date(dateInput);
+    return `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
 }
