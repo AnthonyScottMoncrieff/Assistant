@@ -25,3 +25,15 @@
     max-width: 65%;
     vertical-align: middle;
 }
+
+@media (max-width: 767px) {
+    .Body img{
+        display: none;
+        max-width: 0;
+        margin-right: 0
+    }
+
+    .Description{
+        max-width: 100%;
+    }
+  }
