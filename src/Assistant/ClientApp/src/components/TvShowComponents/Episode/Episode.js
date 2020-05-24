@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from './Episode.module.css';
-import { toBritishDate } from '../../../shared/utilities/utilities';
+import { toBritishDate, isDateInFuture } from '../../../shared/utilities/utilities';
 
 const episode = (props) => {
-    let imgSrc = props.shouldLoadImg ? props.episode.image.medium : "";
+    let imgSrc = props.shouldLoadImg && props.episode.image ? props.episode.image.medium : "/noimg.png";
+    let EpisodeClasses = isDateInFuture(new Date(props.episode.airdate)) ? [classes.Episode, classes.FutureEpisode].join(" ") : [classes.Episode, classes.EpisodeHighlight].join(" ")
     return (
-        <div className={classes.Episode}>
+        <div className={EpisodeClasses}>
             <div className={classes.ImageContainer}>
                 <img src={imgSrc} alt="Thumbnail" />
             </div>

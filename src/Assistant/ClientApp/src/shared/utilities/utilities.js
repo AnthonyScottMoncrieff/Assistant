@@ -6,7 +6,7 @@ export const updateObject = (oldObject, updatedProperties) => {
 };
 
 export const stripHTMLTags = (input) => {
-    return input.replace(/\<[^>]{1,6}\>/g, "");
+    return input === null ? input : input.replace(/<[^>]{1,6}>/g, "");
 }
 
 export const groupByShallowProperty = (collection, property) => {
@@ -29,4 +29,11 @@ export const groupByShallowProperty = (collection, property) => {
 export const toBritishDate = (dateInput) => {
     let date = new Date(dateInput);
     return `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+}
+
+export const isDateInFuture = (dateInput) => {
+    let parsedDate = new Date(dateInput);
+    let currentDateTime = new Date();
+    let currentDateOnly = new Date(`${currentDateTime.getUTCFullYear()}-${currentDateTime.getMonth() + 1}-${currentDateTime.getDate()}`);
+    return currentDateOnly <= parsedDate;
 }

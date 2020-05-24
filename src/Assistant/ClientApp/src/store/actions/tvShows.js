@@ -38,11 +38,9 @@ export const initTvShows = () => {
             var header = configureAuthHeader(token);
             axios.get('/api/tvshows', header)
             .then(response => {
-                console.log(response.data);
                 dispatch(setTvShows(response.data.result))
             })
-            .catch(error => {
-                console.log(error);
+            .catch(_ => {
                 dispatch(fetchTvShowsFailed())
             })
         })

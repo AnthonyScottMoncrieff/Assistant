@@ -5,7 +5,11 @@
     transition: background-color 0.3s;
 }
 
-.Episode:hover{
+.FutureEpisode{
+    background-color: rgba(255, 255, 126, 0.3);
+}
+
+.EpisodeHighlight:hover{
     background-color: aliceblue;
 }
 

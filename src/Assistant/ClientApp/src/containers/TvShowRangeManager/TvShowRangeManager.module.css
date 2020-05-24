@@ -32,4 +32,7 @@
     .Link {
         width: 100%;
     }
+    .Link:nth-child(2n){
+        margin-left: auto;
+    }
   }

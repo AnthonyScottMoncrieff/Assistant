@@ -27,8 +27,8 @@ class EpisodeGrouping extends Component {
                     {this.props.grouping.groupedCollection
                         .sort((a, b) => b.number - a.number)
                         .map(e => 
-                            <Fragment>
-                                <Episode key={e.id} episode={e} shouldLoadImg={!this.state.isCollapsed} />
+                            <Fragment  key={e.id}>
+                                <Episode episode={e} shouldLoadImg={!this.state.isCollapsed} />
                                 <div className={classes.Divider}></div>
                             </Fragment>
                         )}

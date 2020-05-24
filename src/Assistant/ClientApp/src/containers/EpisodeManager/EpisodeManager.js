@@ -33,6 +33,7 @@ class EpisodeManager extends Component{
         return (
             <Fragment>
                 <div className={classes.Header}>Episodes</div>
+                <div className={classes.StyleIndex}><div className={classes.FutureColor}></div><div className={classes.FutureColorText}> - Denotes that the episode either airs today or in the future</div></div>
                 {episodeCollection}
             </Fragment>);
     }
