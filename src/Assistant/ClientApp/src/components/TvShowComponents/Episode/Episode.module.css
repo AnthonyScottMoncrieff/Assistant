@@ -13,10 +13,12 @@
     background-color: aliceblue;
 }
 
-.Episode img{
+.EpisodeImg{
     margin-right: 2%;
-    max-width: 100%;
-    max-height: 122px;
+    width: 218px;
+    height: 122px;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .ImageContainer{

@@ -5,7 +5,7 @@ const fullTvShow = (props) => (
     <div className={classes.FullTvShow}>
         <div className={classes.Header}>{props.header}</div>
         <div className={classes.Body}>
-            <img src={props.thumbnailUrl} alt="Thumbnail" />
+            <div className={classes.TvShowImg} style={{backgroundImage: `url(${props.thumbnailUrl})`}} />
             <div className={classes.Description}>{props.description}</div>
         </div>
     </div>

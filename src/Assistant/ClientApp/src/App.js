@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
-import { Counter } from './containers/Counter/Counter';
 import AuthorizeRoute from './containers/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './containers/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './containers/api-authorization/ApiAuthorizationConstants';
@@ -18,7 +17,6 @@ export default class App extends Component {
         return (
             <Layout>
                 <Route exact path='/' component={Home} />
-                <Route path='/counter' component={Counter} />
                 <AuthorizeRoute exact path='/tv-shows' component={TvShowRangeManager} />
                 <AuthorizeRoute exact path='/tv-shows/:showKey' component={FullTvShowManager} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

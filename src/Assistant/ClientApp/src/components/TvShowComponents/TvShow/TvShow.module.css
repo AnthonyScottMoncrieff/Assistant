@@ -19,3 +19,13 @@
     font-weight: 600;
     margin-bottom: 1%;
 }
+
+.TvShowImg{
+    width: 218px;
+    height: 295px;
+    left: 0;
+    right: 0;
+    display: inherit;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

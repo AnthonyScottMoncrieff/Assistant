@@ -33,9 +33,6 @@ export class NavMenu extends Component {
                                     <NavLink tag={Link} className="text-dark" to="/" onClick={this.toggleNavbar}>Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/counter" onClick={this.toggleNavbar}>Counter</NavLink>
-                                </NavItem>
-                                <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/tv-shows" onClick={this.toggleNavbar}>TV Shows</NavLink>
                                 </NavItem>
                                 <LoginMenu navClicked={this.toggleNavbar} />
