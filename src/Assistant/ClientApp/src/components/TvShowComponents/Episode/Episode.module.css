@@ -6,7 +6,7 @@
 }
 
 .FutureEpisode{
-    background-color: rgba(255, 255, 126, 0.3);
+    background-color: rgba(255, 255, 126, 0.2);
 }
 
 .EpisodeHighlight:hover{
@@ -33,4 +33,13 @@
     font-size: 18px;
     vertical-align: middle;
     width:20%;
+}
+
+.Name{
+    font-weight: 500;
+}
+
+.BlurImage{
+    -webkit-filter: blur(9px);
+    filter: blur(9px);
 }

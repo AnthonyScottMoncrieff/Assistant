@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import classes from './EpisodeGrouping.module.css';
 import Episode from '../../components/TvShowComponents/Episode/Episode';
+import EpisodeGroupingHeader from '../../components/TvShowComponents/EpisodeGroupingHeader/EpisodeGroupingHeader';
 
 class EpisodeGrouping extends Component {
 
@@ -18,12 +19,7 @@ class EpisodeGrouping extends Component {
             <div className={classes.EpisodeGrouping}>
                 <div className={classes.Title} onClick={this.toggleCollapsed}>{`Season ${this.props.grouping.key}`}</div>
                 <div className={toggleClass}>
-                    <div className={classes.HeadersSection}>
-                        <div className={classes.EpisodeImage}>Image</div>
-                        <div className={classes.EpisodeName}>Name</div>
-                        <div className={classes.EpisodeNumber}>Number</div>
-                        <div className={classes.EpisodeReleaseDate}>Release Date</div>
-                    </div>
+                    <EpisodeGroupingHeader />
                     {this.props.grouping.groupedCollection
                         .sort((a, b) => b.number - a.number)
                         .map(e => 
