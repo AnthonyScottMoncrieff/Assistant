@@ -23,11 +23,15 @@ class EpisodeManager extends Component {
         let upcomingEpisode = null;
         if (!this.props.episodesLoading && !this.props.error) {
             let show = this.props.showEpisodes.filter(x => x.showKey === this.props.showKey)[0];
-            episodeCollection = groupByShallowProperty(show.episodes, 'season')
+            episodeCollection = 
+            <Fragment>
+                <div className={classes.StyleIndex}><div className={classes.FutureColor}></div><div className={classes.FutureColorText}> - Denotes that the episode either airs today or in the future</div></div>
+                {groupByShallowProperty(show.episodes, 'season')
                 .sort((a, b) => b.key - a.key)
                 .map(x => <EpisodeGrouping
                     key={x.key}
-                    grouping={x} />);
+                    grouping={x} />)}
+            </Fragment>
             upcomingEpisode = <UpcomingEpisode episodes={show.episodes} />
         }
         else if (this.props.error) {
@@ -37,7 +41,6 @@ class EpisodeManager extends Component {
             <Fragment>
                 {upcomingEpisode}
                 <div className={classes.Header}>Episodes</div>
-                <div className={classes.StyleIndex}><div className={classes.FutureColor}></div><div className={classes.FutureColorText}> - Denotes that the episode either airs today or in the future</div></div>
                 {episodeCollection}
             </Fragment>);
     }

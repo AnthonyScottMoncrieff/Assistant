@@ -6,7 +6,7 @@ export const updateObject = (oldObject, updatedProperties) => {
 };
 
 export const stripHTMLTags = (input) => {
-    return input === null ? input : input.replace(/<[^>]{1,6}>/g, "");
+    return input === null ? input : input.replace(/<[^>]{1,9}>/g, "");
 }
 
 export const groupByShallowProperty = (collection, property) => {
