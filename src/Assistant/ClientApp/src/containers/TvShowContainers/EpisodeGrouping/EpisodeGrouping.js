@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import classes from './EpisodeGrouping.module.css';
-import Episode from '../../components/TvShowComponents/Episode/Episode';
-import EpisodeGroupingHeader from '../../components/TvShowComponents/EpisodeGroupingHeader/EpisodeGroupingHeader';
+import Episode from '../../../components/TvShowComponents/Episode/Episode';
+import EpisodeGroupingHeader from '../../../components/TvShowComponents/EpisodeGroupingHeader/EpisodeGroupingHeader';
 
 class EpisodeGrouping extends Component {
 

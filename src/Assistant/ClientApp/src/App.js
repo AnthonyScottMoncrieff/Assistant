@@ -5,8 +5,8 @@ import Home from './components/Home/Home';
 import AuthorizeRoute from './containers/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './containers/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './containers/api-authorization/ApiAuthorizationConstants';
-import TvShowRangeManager from './containers/TvShowRangeManager/TvShowRangeManager';
-import FullTvShowManager from './containers/FullTvShowManager/FullTvShowManager';
+import TvShowRangeManager from './containers/TvShowContainers/TvShowRangeManager/TvShowRangeManager';
+import FullTvShowManager from './containers/TvShowContainers/FullTvShowManager/FullTvShowManager';
 
 import './custom.css'
 

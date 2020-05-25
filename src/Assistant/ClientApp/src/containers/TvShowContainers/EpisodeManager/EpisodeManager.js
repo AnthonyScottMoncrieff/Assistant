@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import Spinner from '../../components/UI/Spinner/Spinner';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './EpisodeManager.module.css'
-import { groupByShallowProperty } from '../../shared/utilities/utilities';
+import { groupByShallowProperty } from '../../../shared/utilities/utilities';
 import EpisodeGrouping from '../EpisodeGrouping/EpisodeGrouping';
-import * as actions from '../../store/actions'
+import * as actions from '../../../store/actions'
 import { connect } from 'react-redux';
-import UpcomingEpisode from '../../components/TvShowComponents/UpcomingEpisode/UpcomingEpisode';
+import UpcomingEpisode from '../../../components/TvShowComponents/UpcomingEpisode/UpcomingEpisode';
 
 class EpisodeManager extends Component {
 

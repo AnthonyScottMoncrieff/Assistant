@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import TVShow from '../../components/TvShowComponents/TvShow/TvShow'
-import Spinner from '../../components/UI/Spinner/Spinner'
+import TVShow from '../../../components/TvShowComponents/TvShow/TvShow'
+import Spinner from '../../../components/UI/Spinner/Spinner'
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 import classes from './TvShowRangeManager.module.css';
 import { Link } from 'react-router-dom';
+import Add from '../../../components/UI/Add/Add';
+import Modal from '../../../components/UI/Modal/Modal';
 
 class TvShowRangeManager extends Component{
+
+    state={
+        shouldShowModal: false
+    }
+
     componentDidMount () {
         this.props.onFetchTvShows(this.props.shows, false);
+    }
+
+    openAddTvshowModalHandler = () => {
+        this.setState({shouldShowModal: true});
+    }
+
+    closeAddTvshowModalHandler = () => {
+        this.setState({shouldShowModal: false});
     }
     
     render(){
@@ -25,7 +40,11 @@ class TvShowRangeManager extends Component{
             shows = (<div>ERROR</div>);
         return (
             <div className={classes.TvShowRangeManager}>
-                {shows}
+                <Modal show={this.state.shouldShowModal} modalClosed={this.closeAddTvshowModalHandler}></Modal>
+                <Add clicked={this.openAddTvshowModalHandler} />
+                <div>
+                    {shows}
+                </div>
             </div>
         )
     }

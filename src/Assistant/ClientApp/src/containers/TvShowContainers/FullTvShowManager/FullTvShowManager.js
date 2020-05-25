@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import FullTvShow from '../../components/TvShowComponents/FullTvShow/FullTvShow';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import FullTvShow from '../../../components/TvShowComponents/FullTvShow/FullTvShow';
 import EpisodeManager from '../EpisodeManager/EpisodeManager';
 
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 
 class FullTvShowManager extends Component{
     componentDidMount () {
