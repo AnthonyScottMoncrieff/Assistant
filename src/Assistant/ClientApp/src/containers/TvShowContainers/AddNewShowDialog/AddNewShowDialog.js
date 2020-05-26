@@ -24,19 +24,21 @@ class AddNewShowDialog extends Component {
             },
             selectedShow: null,
             fetchingShow: false,
-            errorFetchingShow: false
+            errorFetchingShow: false,
+            searchTerm: ""
         }
     }
 
     cancelSubmissionHandler = () => {
         let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: null});
         this.setState({tvShowRequest: updatedTvshowRequest});
+        document.getElementById('modal-backdrop').click();
     }
 
     fetchShowHandler = () => {
-        this.setState(updateObject(this.state.tvShowRequest, {fetchingShow: true}));
         let showRequest = this.state.tvShowRequest;
         let parsedValue =  showRequest.userDefinedName.value.replace(/(?!\s)[\W]/g, "").replace(/\s/g, "-");
+        this.setState({tvShowRequest: updateObject(this.state.tvShowRequest, {fetchingShow: true, searchTerm: parsedValue})});
         axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${parsedValue}`)
             .then((response) => {
                 let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: response.data, fetchingShow: false, errorFetchingShow: false});
