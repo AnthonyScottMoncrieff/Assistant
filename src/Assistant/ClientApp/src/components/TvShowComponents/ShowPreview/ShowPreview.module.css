@@ -27,3 +27,14 @@
     display: inline-block;
     margin-top: 12px;
 }
+
+@media (max-width: 800px) {
+    .ShowPreview img{
+        display: none;
+    }
+
+    .ShowDetail{
+        width: 100%;
+        margin-left: 0;
+    }
+}
