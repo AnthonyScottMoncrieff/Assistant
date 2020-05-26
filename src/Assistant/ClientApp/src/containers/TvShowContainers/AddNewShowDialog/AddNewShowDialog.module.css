@@ -1,0 +1,25 @@
+.AddNewShowDialog{
+    width: 100%;
+    background-color: white;
+}
+
+.TvShowEntry{
+    width: 78%;
+    margin-right: 2%;
+    display: inline-block;
+}
+
+.TvShowEntrySearchButton{
+    width: 20%;
+    display: inline-block;
+}
+
+.ShowSearchTitle{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.SubmitRegion{
+    width: 100%;
+    text-align: right;
+}

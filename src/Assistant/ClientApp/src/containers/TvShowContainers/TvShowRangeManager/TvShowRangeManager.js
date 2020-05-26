@@ -7,6 +7,7 @@ import classes from './TvShowRangeManager.module.css';
 import { Link } from 'react-router-dom';
 import Add from '../../../components/UI/Add/Add';
 import Modal from '../../../components/UI/Modal/Modal';
+import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 
 class TvShowRangeManager extends Component{
 
@@ -40,7 +41,7 @@ class TvShowRangeManager extends Component{
             shows = (<div>ERROR</div>);
         return (
             <div className={classes.TvShowRangeManager}>
-                <Modal show={this.state.shouldShowModal} modalClosed={this.closeAddTvshowModalHandler}></Modal>
+                <Modal show={this.state.shouldShowModal} modalClosed={this.closeAddTvshowModalHandler}><AddNewShowDialog /></Modal>
                 <Add clicked={this.openAddTvshowModalHandler} />
                 <div>
                     {shows}
