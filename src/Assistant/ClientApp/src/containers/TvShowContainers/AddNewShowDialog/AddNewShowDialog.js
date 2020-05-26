@@ -30,7 +30,7 @@ class AddNewShowDialog extends Component {
     }
 
     cancelSubmissionHandler = () => {
-        let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: null});
+        let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: null, searchTerm: ""});
         this.setState({tvShowRequest: updatedTvshowRequest});
         document.getElementById('modal-backdrop').click();
     }
