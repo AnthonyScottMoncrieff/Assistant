@@ -82,7 +82,7 @@ export const submitTvShowFailed = () => {
     };
 };
 
-export const initTvShowSubmission = (show, key) => {
+export const initTvShowSubmission = (show, key, closeDialog) => {
     show.summary = stripHTMLTags(show.summary);
     return dispatch => {
         dispatch(submitTvShowStarted());
@@ -92,7 +92,8 @@ export const initTvShowSubmission = (show, key) => {
                 let headers = configureAuthHeader(token);
                 axios.post('/api/tvshows', postData, headers)
                     .then(response => {
-                        dispatch(submitTvShow(response.data.result.tvShow))
+                        dispatch(submitTvShow(response.data.result.tvShow));
+                        closeDialog();
                     })
                     .catch(_ => {
                         dispatch(submitTvShowFailed())

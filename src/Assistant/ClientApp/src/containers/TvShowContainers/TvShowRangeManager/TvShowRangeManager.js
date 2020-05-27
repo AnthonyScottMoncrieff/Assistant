@@ -9,35 +9,40 @@ import Add from '../../../components/UI/Add/Add';
 import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 
-class TvShowRangeManager extends Component{
+class TvShowRangeManager extends Component {
 
-    state={
+    state = {
         shouldShowModal: false
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.onFetchTvShows(this.props.shows, false);
     }
 
     openAddTvshowModalHandler = () => {
-        this.setState({shouldShowModal: true});
+        this.setState({ shouldShowModal: true });
     }
 
     closeAddTvshowModalHandler = () => {
-        this.setState({shouldShowModal: false});
+        this.setState({ shouldShowModal: false });
     }
-    
-    render(){
+
+    render() {
         let shows = <Spinner />;
-        if(!this.props.loading && !this.props.error){
-            shows = this.props.shows.map(show => 
-                <Link className={classes.Link} key={show.showKey} to={`/tv-shows/${show.showKey}`}><TVShow 
-                thumbnailUrl={show.thumbnailUrl} 
-                showName={show.showName} 
-                description={show.summary} /></Link>
-                );
+        if (!this.props.loading && !this.props.error) {
+            shows = this.props.shows.map(show =>
+                <div className={classes.ShowContainer} key={show.showKey}>
+                    <Link className={classes.Link} to={`/tv-shows/${show.showKey}`}>
+                        <TVShow
+                            thumbnailUrl={show.thumbnailUrl}
+                            showName={show.showName}
+                            description={show.summary} />
+                    </Link>
+                    <div className={classes.Delete}>X</div>
+                </div>
+            );
         }
-        else if(this.props.error)
+        else if (this.props.error)
             shows = (<div>ERROR</div>);
         return (
             <div className={classes.TvShowRangeManager}>
@@ -61,8 +66,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch( actions.initTvShows() )
+        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch(actions.initTvShows())
     };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( TvShowRangeManager );
+export default connect(mapStateToProps, mapDispatchToProps)(TvShowRangeManager);

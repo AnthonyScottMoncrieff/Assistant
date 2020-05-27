@@ -1,5 +1,5 @@
-.Link {
-    width: 48%;
+.ShowContainer {
+    width: 32%;
     cursor: pointer;
     text-align: center;
     display: inline-block;
@@ -10,6 +10,9 @@
     border-radius: 5px;
     transition: box-shadow 0.2s;
     text-decoration: none;
+    margin-left: 2%;
+    position: relative;
+    z-index: 98;
 }
 
 .TvShow:hover{
@@ -18,21 +21,62 @@
     box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
 }
 
-.Link:nth-child(2n){
-    margin-left: 2%;
+.ShowContainer:nth-child(3n + 1){
+    margin-left: 0;
 }
 
-.Link:hover{
+.ShowContainer:hover{
     -webkit-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
 }
 
+.ShowContainer:hover .Delete{
+    display: inherit;
+}
+
+.Delete{
+    position: absolute;
+    right: 3%;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.61);
+    border-radius: 50px;
+    top: 1%;
+    z-index: 99;
+    width: 37px;
+    text-align: center;
+    height: 35px;
+    padding-top: 1px;
+    font-size: 21px;
+    cursor: pointer;
+    display: none;
+    transition: background-color 0.1s, width 0.1s, height 0.1s, padding-top 0.1s;
+}
+
+.Delete:hover{
+    background-color: red;
+    padding-top: 3px;
+    width: 40px;
+    height: 38px;
+}
+
+@media (max-width: 1200px) {
+    .ShowContainer {
+        width: 48%;
+    }
+    .ShowContainer:nth-child(3n + 1){
+        margin-left: auto;
+    }
+    .ShowContainer:nth-child(2n){
+        margin-left: 2%;
+    }
+  }
+
 @media (max-width: 767px) {
-    .Link {
+    .ShowContainer {
         width: 100%;
     }
-    .Link:nth-child(2n){
+    .ShowContainer:nth-child(3n + 1){
         margin-left: auto;
     }
   }

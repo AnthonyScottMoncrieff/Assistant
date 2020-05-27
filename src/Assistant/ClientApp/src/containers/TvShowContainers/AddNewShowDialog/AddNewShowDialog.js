@@ -32,10 +32,11 @@ class AddNewShowDialog extends Component {
     }
 
     submitClickHandler = () => {
-        this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm);
+        this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm, () => this.cancelSubmissionHandler());
     }
 
     cancelSubmissionHandler = () => {
+        this.updateUserDefinedName({ value: "", valid: false })
         let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: null, searchTerm: ""});
         this.setState({tvShowRequest: updatedTvshowRequest});
         document.getElementById('modal-backdrop').click();
@@ -127,7 +128,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitTvShow: (show, key) => show === null ? null : dispatch( actions.initTvShowSubmission(show, key) )
+        onSubmitTvShow: (show, key, closeDialog) => show === null ? null : dispatch( actions.initTvShowSubmission(show, key, closeDialog) )
     };
 };
 
