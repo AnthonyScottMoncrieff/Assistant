@@ -6,6 +6,8 @@ import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import ShowPreview from '../../../components/TvShowComponents/ShowPreview/ShowPreview';
 import axios from 'axios';
+import * as actions from '../../../store/actions'
+import { connect } from 'react-redux';
 
 class AddNewShowDialog extends Component {
     state = {
@@ -27,6 +29,10 @@ class AddNewShowDialog extends Component {
             errorFetchingShow: false,
             searchTerm: ""
         }
+    }
+
+    submitClickHandler = () => {
+        this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm);
     }
 
     cancelSubmissionHandler = () => {
@@ -81,7 +87,7 @@ class AddNewShowDialog extends Component {
                         showSummary={showRequest.selectedShow.summary} />;
         let submit = showRequest.selectedShow !== null 
             ? <Fragment>
-                <Button btnType="Success">Submit</Button>
+                <Button btnType="Success" clicked={this.submitClickHandler} disabled={this.props.loading}>Submit</Button>
                 <Button btnType="Danger" clicked={this.cancelSubmissionHandler}>Cancel</Button>
               </Fragment>
             : null;
@@ -112,4 +118,17 @@ class AddNewShowDialog extends Component {
     }
 }
 
-export default AddNewShowDialog;
+const mapStateToProps = state => {
+    return {
+        loading: state.tvShows.tvShowSubmissionLoading,
+        error: state.tvShows.tvShowSubmissionError
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitTvShow: (show, key) => show === null ? null : dispatch( actions.initTvShowSubmission(show, key) )
+    };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( AddNewShowDialog );
