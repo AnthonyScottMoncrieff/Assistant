@@ -38,7 +38,7 @@ namespace Assistant.Controllers
         [HttpPost]
         public async Task<IActionResult> PostShow([FromBody]TvShow tvShow)
         {
-            var response = await _userTVShowMappingManager.ManageAsync(tvShow);
+            var response = await _userTVShowMappingManager.ManageAdditionAsync(tvShow);
             return ReturnFromActionResponse(response);
         }
 

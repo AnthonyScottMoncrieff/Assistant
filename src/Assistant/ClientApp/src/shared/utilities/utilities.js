@@ -11,10 +11,10 @@ export const stripHTMLTags = (input) => {
 
 export const groupByShallowProperty = (collection, property) => {
     let reduction = collection.reduce((accumulator, currentValue) => {
-        if(!accumulator["groupings"]) accumulator["groupings"] = [];
-        let grouping = accumulator.groupings.filter(x => x["key"] === currentValue[property])[0]; 
-        if(grouping === undefined){
-            let newGrouping = {key: currentValue[property], groupedCollection: []};
+        if (!accumulator["groupings"]) accumulator["groupings"] = [];
+        let grouping = accumulator.groupings.filter(x => x["key"] === currentValue[property])[0];
+        if (grouping === undefined) {
+            let newGrouping = { key: currentValue[property], groupedCollection: [] };
             accumulator.groupings.push(newGrouping);
             grouping = newGrouping;
         }

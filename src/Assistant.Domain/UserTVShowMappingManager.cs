@@ -17,7 +17,7 @@ namespace Assistant.Domain
             _addUserTVShowMapping = addUserTVShowMapping;
         }
 
-        public async Task<ActionResponse<UserTVShowMapping>> ManageAsync(TvShow tvShow)
+        public async Task<ActionResponse<UserTVShowMapping>> ManageAdditionAsync(TvShow tvShow)
         {
             var userId = _userContextManager.GetUserIdFromContext();
             var mapping = new UserTVShowMapping { UserId = userId, TvShow = tvShow };

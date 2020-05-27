@@ -10,7 +10,6 @@ import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 
 class TvShowRangeManager extends Component {
-
     state = {
         shouldShowModal: false
     }

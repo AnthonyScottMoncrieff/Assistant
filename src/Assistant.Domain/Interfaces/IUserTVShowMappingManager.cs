@@ -6,6 +6,6 @@ namespace Assistant.Domain.Interfaces
 {
     public interface IUserTVShowMappingManager
     {
-        Task<ActionResponse<UserTVShowMapping>> ManageAsync(TvShow tvShow);
+        Task<ActionResponse<UserTVShowMapping>> ManageAdditionAsync(TvShow tvShow);
     }
 }

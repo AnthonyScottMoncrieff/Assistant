@@ -21,9 +21,9 @@
     box-sizing: border-box;
 }
 
-.InputElement:focus {
-    outline: none;
-}
+    .InputElement:focus {
+        outline: none;
+    }
 
 .Invalid {
     border: 1px solid red;

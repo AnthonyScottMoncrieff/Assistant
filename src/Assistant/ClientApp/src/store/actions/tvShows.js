@@ -12,7 +12,6 @@ const configureAuthHeader = (token) => {
 }
 
 const configurePost = (show, key) => {
-
     let imgUrl = show.image && show.image.medium ? show.image.medium : "";
 
     return {

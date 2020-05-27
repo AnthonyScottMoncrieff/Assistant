@@ -8,7 +8,7 @@ const episode = (props) => {
     return (
         <div className={EpisodeClasses}>
             <div className={classes.ImageContainer}>
-                <div className={classes.EpisodeImg} style={{backgroundImage: `url(${imgSrc})`}} />
+                <div className={classes.EpisodeImg} style={{ backgroundImage: `url(${imgSrc})` }} />
             </div>
             <div className={classes.Name}>{props.episode.name}</div>
             <div className={classes.Number}>{props.episode.number}</div>

@@ -42,7 +42,7 @@ namespace Assistant.Tests.Unit
             _getTVShowsByUser.Setup(x => x.GetTvShowsByUserId(It.IsAny<string>())).ReturnsAsync(new ActionResponse<IEnumerable<TvShow>> { WasSuccessful = true, Result = _shows });
             _mapping = _fixture.Create<UserTVShowMapping>();
             _userTVShowMappingManager = new Mock<IUserTVShowMappingManager>();
-            _userTVShowMappingManager.Setup(x => x.ManageAsync(It.IsAny<TvShow>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = true, Result = _mapping });
+            _userTVShowMappingManager.Setup(x => x.ManageAdditionAsync(It.IsAny<TvShow>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = true, Result = _mapping });
 
             _showController = new TvShowController(_getTVShowsByUser.Object, _logger.Object, _userContextManager.Object, _userTVShowMappingManager.Object);
         }
@@ -86,14 +86,14 @@ namespace Assistant.Tests.Unit
             //Assert
             Assert.AreEqual(response.GetType(), typeof(OkObjectResult));
             _logger.Verify(x => x.CommitAsync(), Times.Once);
-            _userTVShowMappingManager.Verify(x => x.ManageAsync(It.IsAny<TvShow>()), Times.Once);
+            _userTVShowMappingManager.Verify(x => x.ManageAdditionAsync(It.IsAny<TvShow>()), Times.Once);
         }
 
         [Test]
         public async Task Post_Should_Call_Correct_Dependencies_and_Return_Correct_Type_On_Query_Exception()
         {
             //Arrange
-            _userTVShowMappingManager.Setup(x => x.ManageAsync(It.IsAny<TvShow>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = false, Result = null, Message = "Error" });
+            _userTVShowMappingManager.Setup(x => x.ManageAdditionAsync(It.IsAny<TvShow>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = false, Result = null, Message = "Error" });
             var tvShow = new TvShow { ShowKey = "test-test", ShowName = "Test Test" };
 
             //Act
@@ -102,7 +102,7 @@ namespace Assistant.Tests.Unit
             //Assert
             Assert.AreEqual(response.GetType(), typeof(BadRequestObjectResult));
             _logger.Verify(x => x.CommitAsync(), Times.Once);
-            _userTVShowMappingManager.Verify(x => x.ManageAsync(It.IsAny<TvShow>()), Times.Once);
+            _userTVShowMappingManager.Verify(x => x.ManageAdditionAsync(It.IsAny<TvShow>()), Times.Once);
         }
     }
 }

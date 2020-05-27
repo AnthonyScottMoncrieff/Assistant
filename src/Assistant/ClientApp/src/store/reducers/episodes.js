@@ -8,7 +8,7 @@ const initalState = {
 }
 
 const setEpisodes = (state, action) => {
-    let updatedShow = {showKey: action.showKey, episodes: action.episodes };
+    let updatedShow = { showKey: action.showKey, episodes: action.episodes };
     let shows = [...state.showEpisodes.filter(x => x.showKey !== action.showKey), updatedShow];
     return updateObject(state, {
         showEpisodes: shows,
@@ -18,23 +18,23 @@ const setEpisodes = (state, action) => {
 }
 
 const fetchEpisodesStarted = (state) => {
-    return updateObject(state, {episodesFetchError: false, episodesLoading: true});
+    return updateObject(state, { episodesFetchError: false, episodesLoading: true });
 }
 
 const fetchEpisodesFailed = (state) => {
-    return updateObject(state, {episodesFetchError: true, episodesLoading: false});
+    return updateObject(state, { episodesFetchError: true, episodesLoading: false });
 }
 
 const setIsLoading = (state) => {
-    return updateObject(state, {episodesLoading: true});
+    return updateObject(state, { episodesLoading: true });
 }
 
 const setNotIsLoading = (state) => {
-    return updateObject(state, {episodesLoading: false});
+    return updateObject(state, { episodesLoading: false });
 }
 
 const reducer = (state = initalState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case actionTypes.SET_ISLOADING: return setIsLoading(state);
         case actionTypes.SET_NOT_ISLOADING: return setNotIsLoading(state);
         case actionTypes.FETCH_EPISODES_STARTED: return fetchEpisodesStarted(state);

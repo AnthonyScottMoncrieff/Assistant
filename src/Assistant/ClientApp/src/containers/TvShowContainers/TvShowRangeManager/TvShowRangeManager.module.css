@@ -15,27 +15,27 @@
     z-index: 98;
 }
 
-.TvShow:hover{
+.TvShow:hover {
     -webkit-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
 }
 
-.ShowContainer:nth-child(3n + 1){
+.ShowContainer:nth-child(3n + 1) {
     margin-left: 0;
 }
 
-.ShowContainer:hover{
+.ShowContainer:hover {
     -webkit-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
     box-shadow: 7px 7px 25px 0px rgba(0,0,0,0.75);
 }
 
-.ShowContainer:hover .Delete{
-    display: inherit;
-}
+    .ShowContainer:hover .Delete {
+        display: inherit;
+    }
 
-.Delete{
+.Delete {
     position: absolute;
     right: 3%;
     color: white;
@@ -53,30 +53,33 @@
     transition: background-color 0.1s, width 0.1s, height 0.1s, padding-top 0.1s;
 }
 
-.Delete:hover{
-    background-color: red;
-    padding-top: 3px;
-    width: 40px;
-    height: 38px;
-}
+    .Delete:hover {
+        background-color: red;
+        padding-top: 3px;
+        width: 40px;
+        height: 38px;
+    }
 
 @media (max-width: 1200px) {
     .ShowContainer {
         width: 48%;
     }
-    .ShowContainer:nth-child(3n + 1){
-        margin-left: auto;
-    }
-    .ShowContainer:nth-child(2n){
-        margin-left: 2%;
-    }
-  }
+
+        .ShowContainer:nth-child(3n + 1) {
+            margin-left: auto;
+        }
+
+        .ShowContainer:nth-child(2n) {
+            margin-left: 2%;
+        }
+}
 
 @media (max-width: 767px) {
     .ShowContainer {
         width: 100%;
     }
-    .ShowContainer:nth-child(3n + 1){
-        margin-left: auto;
-    }
-  }
+
+        .ShowContainer:nth-child(3n + 1) {
+            margin-left: auto;
+        }
+}

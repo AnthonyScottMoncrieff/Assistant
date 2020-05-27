@@ -1,11 +1,11 @@
-.AddContainer{
+.AddContainer {
     display: block;
     margin-bottom: 21px;
     text-align: right;
     margin-right: 2%;
 }
 
-.Add{
+.Add {
     display: inline-block;
     border-radius: 100px;
     background-color: cornflowerblue;
@@ -21,10 +21,10 @@
     transition: box-shadow 0.2s, transform 0.4s;
 }
 
-.Add:hover{
-    background-color: #456bad;
-    transform: rotate(90deg);
-    -webkit-box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
-    box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
-}
+    .Add:hover {
+        background-color: #456bad;
+        transform: rotate(90deg);
+        -webkit-box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
+        box-shadow: 0px 1px 18px -8px rgba(0,0,0,0.75);
+    }

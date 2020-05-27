@@ -37,23 +37,23 @@ class AddNewShowDialog extends Component {
 
     cancelSubmissionHandler = () => {
         this.updateUserDefinedName({ value: "", valid: false })
-        let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: null, searchTerm: ""});
-        this.setState({tvShowRequest: updatedTvshowRequest});
+        let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { selectedShow: null, searchTerm: "" });
+        this.setState({ tvShowRequest: updatedTvshowRequest });
         document.getElementById('modal-backdrop').click();
     }
 
     fetchShowHandler = () => {
         let showRequest = this.state.tvShowRequest;
-        let parsedValue =  showRequest.userDefinedName.value.replace(/(?!\s)[\W]/g, "").replace(/\s/g, "-");
-        this.setState({tvShowRequest: updateObject(this.state.tvShowRequest, {fetchingShow: true, searchTerm: parsedValue})});
+        let parsedValue = showRequest.userDefinedName.value.replace(/(?!\s)[\W]/g, "").replace(/\s/g, "-");
+        this.setState({ tvShowRequest: updateObject(this.state.tvShowRequest, { fetchingShow: true, searchTerm: parsedValue }) });
         axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${parsedValue}`)
             .then((response) => {
-                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {selectedShow: response.data, fetchingShow: false, errorFetchingShow: false});
-                this.setState({tvShowRequest: updatedTvshowRequest});
+                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { selectedShow: response.data, fetchingShow: false, errorFetchingShow: false });
+                this.setState({ tvShowRequest: updatedTvshowRequest });
             })
             .catch(err => {
-                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, {fetchingShow: false, errorFetchingShow: true});
-                this.setState({tvShowRequest: updatedTvshowRequest});
+                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { fetchingShow: false, errorFetchingShow: true });
+                this.setState({ tvShowRequest: updatedTvshowRequest });
             })
     }
 
@@ -76,21 +76,21 @@ class AddNewShowDialog extends Component {
 
     render() {
         let showRequest = this.state.tvShowRequest;
-        let selectedShowDisplay = showRequest.errorFetchingShow 
-            ? <div>ERROR FETCHING SHOW</div> 
-            : showRequest.selectedShow === null && !showRequest.fetchingShow 
+        let selectedShowDisplay = showRequest.errorFetchingShow
+            ? <div>ERROR FETCHING SHOW</div>
+            : showRequest.selectedShow === null && !showRequest.fetchingShow
                 ? null
-                : showRequest.selectedShow === null && showRequest.fetchingShow 
-                    ? <Spinner /> 
-                    : <ShowPreview 
-                        showImg={showRequest.selectedShow.image.medium} 
+                : showRequest.selectedShow === null && showRequest.fetchingShow
+                    ? <Spinner />
+                    : <ShowPreview
+                        showImg={showRequest.selectedShow.image.medium}
                         showName={showRequest.selectedShow.name}
                         showSummary={showRequest.selectedShow.summary} />;
-        let submit = showRequest.selectedShow !== null 
+        let submit = showRequest.selectedShow !== null
             ? <Fragment>
                 <Button btnType="Success" clicked={this.submitClickHandler} disabled={this.props.loading}>Submit</Button>
                 <Button btnType="Danger" clicked={this.cancelSubmissionHandler}>Cancel</Button>
-              </Fragment>
+            </Fragment>
             : null;
 
         return (
@@ -128,8 +128,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitTvShow: (show, key, closeDialog) => show === null ? null : dispatch( actions.initTvShowSubmission(show, key, closeDialog) )
+        onSubmitTvShow: (show, key, closeDialog) => show === null ? null : dispatch(actions.initTvShowSubmission(show, key, closeDialog))
     };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( AddNewShowDialog );
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewShowDialog);

@@ -43,7 +43,7 @@ namespace Assistant.Tests.Unit
             var tvShow = _fixture.Create<TvShow>();
 
             //Act
-            await _userTVShowMappingManager.ManageAsync(tvShow);
+            await _userTVShowMappingManager.ManageAdditionAsync(tvShow);
 
             //Assert
             _userContextManager.Verify(x => x.GetUserIdFromContext(), Times.Once);

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import FullTvShow from '../../../components/TvShowComponents/FullTvShow/FullTvShow';
 import EpisodeManager from '../EpisodeManager/EpisodeManager';
@@ -6,19 +6,19 @@ import EpisodeManager from '../EpisodeManager/EpisodeManager';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
-class FullTvShowManager extends Component{
-    componentDidMount () {
+class FullTvShowManager extends Component {
+    componentDidMount() {
         this.props.onFetchTvShows(this.props.shows, false);
     }
 
-    render(){
+    render() {
         let show = <Spinner />;
         let episodes = null;
-        if(!this.props.tvShowsloading){
+        if (!this.props.tvShowsloading) {
             show = (
                 this.props.shows
-                .filter(show => show.showKey === this.props.match.params.showKey)
-                    .map(show => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary}/>))
+                    .filter(show => show.showKey === this.props.match.params.showKey)
+                    .map(show => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary} />))
             episodes = <EpisodeManager showKey={this.props.match.params.showKey} />
         }
 
@@ -40,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch( actions.initTvShows() )
+        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch(actions.initTvShows())
     };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( FullTvShowManager );
+export default connect(mapStateToProps, mapDispatchToProps)(FullTvShowManager);

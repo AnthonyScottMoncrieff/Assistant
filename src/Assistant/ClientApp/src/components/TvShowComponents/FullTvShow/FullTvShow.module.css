@@ -1,43 +1,43 @@
-.FullTvShow{
+.FullTvShow {
     position: relative;
     margin-bottom: 25px;
 }
 
-.Header{
+.Header {
     font-size: 30px;
     font-weight: 800;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
-.Body{
+.Body {
     display: inline-block;
 }
 
-.TvShowImg{
+.TvShowImg {
     display: inline-block;
     width: 210px;
-    height:295px;
+    height: 295px;
     margin-right: 5%;
     background-repeat: no-repeat;
     background-size: contain;
     vertical-align: middle;
 }
 
-.Description{
+.Description {
     display: inline-block;
     max-width: 65%;
     vertical-align: middle;
 }
 
 @media (max-width: 767px) {
-    .TvShowImg{
+    .TvShowImg {
         display: none;
         max-width: 0;
         margin-right: 0
     }
 
-    .Description{
+    .Description {
         max-width: 100%;
     }
-  }
+}

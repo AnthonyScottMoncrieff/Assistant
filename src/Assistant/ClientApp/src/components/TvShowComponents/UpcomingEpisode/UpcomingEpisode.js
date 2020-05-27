@@ -6,10 +6,10 @@ import classes from './UpcomingEpisode.module.css';
 
 const upcomingEpisode = (props) => {
     let upcomingEpisode = props.episodes.filter(x => x.airdate !== null && isDateInFuture(x.airdate)).sort((a, b) => new Date(a.airdate) - new Date(b.airdate))[0];
-    if(upcomingEpisode === undefined)
+    if (upcomingEpisode === undefined)
         return null;
-    
-    return(
+
+    return (
         <div className={classes.UpComingEpisodeContainer}>
             <div className={classes.Header}>Upcoming Episode</div>
             <div className={classes.UpComingEpisode}>

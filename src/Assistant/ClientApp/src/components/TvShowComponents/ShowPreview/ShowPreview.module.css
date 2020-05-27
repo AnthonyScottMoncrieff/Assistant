@@ -1,39 +1,39 @@
-.ShowPreview{
+.ShowPreview {
     width: 100%;
     text-align: center;
 }
 
-.ShowPreview img{
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 20%;
-    height: 200px;
-}
+    .ShowPreview img {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 20%;
+        height: 200px;
+    }
 
-.ShowDetail{
+.ShowDetail {
     display: inline-block;
     width: 60%;
     margin-left: 5%;
     vertical-align: middle;
 }
 
-.ShowName{
+.ShowName {
     display: inline-block;
     font-size: 20px;
     font-weight: 600;
 }
 
-.ShowDescription{
+.ShowDescription {
     display: inline-block;
     margin-top: 12px;
 }
 
 @media (max-width: 800px) {
-    .ShowPreview img{
+    .ShowPreview img {
         display: none;
     }
 
-    .ShowDetail{
+    .ShowDetail {
         width: 100%;
         margin-left: 0;
     }

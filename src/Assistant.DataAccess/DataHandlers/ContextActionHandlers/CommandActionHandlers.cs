@@ -1,6 +1,8 @@
 ﻿using Assistant.DataAccess.DataHandlers.ContextActionHandlers.Interfaces;
 using Assistant.DataAccess.Extensions;
 using Assistant.Models.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Assistant.DataAccess.DataHandlers.ContextActionHandlers
@@ -20,6 +22,17 @@ namespace Assistant.DataAccess.DataHandlers.ContextActionHandlers
             userTVShowMapping.TvShow = show;
             userTVShowMapping.TVShowId = show.TVShowId;
             await _applicationDbContext.Set<UserTVShowMapping>().AddAsync(userTVShowMapping);
+            await _applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserTvShowMappingAsync(string userId, string showKey)
+        {
+            var usertvShowMappingSet = _applicationDbContext.Set<UserTVShowMapping>();
+            var userShowTvShowMapping = await usertvShowMappingSet.Include(x => x.TvShow).Where(x => x.UserId == userId && x.TvShow.ShowKey == showKey).FirstOrDefaultAsync();
+            if (userShowTvShowMapping == null)
+                return;
+
+            usertvShowMappingSet.Remove(userShowTvShowMapping);
             await _applicationDbContext.SaveChangesAsync();
         }
     }

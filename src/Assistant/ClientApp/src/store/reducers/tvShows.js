@@ -27,23 +27,23 @@ const submitTvShow = (state, action) => {
 }
 
 const fetchTvShowsStarted = (state) => {
-    return updateObject(state, {tvShowFetchError: false, tvShowsLoading: true});
+    return updateObject(state, { tvShowFetchError: false, tvShowsLoading: true });
 }
 
 const fetchTvShowsFailed = (state) => {
-    return updateObject(state, {tvShowFetchError: true, tvShowsLoading: false});
+    return updateObject(state, { tvShowFetchError: true, tvShowsLoading: false });
 }
 
 const submitTvShowsStarted = (state) => {
-    return updateObject(state, {tvShowSubmissionError: false, tvShowSubmissionLoading: true});
+    return updateObject(state, { tvShowSubmissionError: false, tvShowSubmissionLoading: true });
 }
 
 const submitTvShowsFailed = (state) => {
-    return updateObject(state, {tvShowSubmissionError: true, tvShowSubmissionLoading: false});
+    return updateObject(state, { tvShowSubmissionError: true, tvShowSubmissionLoading: false });
 }
 
 const reducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case actionTypes.SET_TVSHOWS: return setTvShows(state, action);
         case actionTypes.FETCH_TVSHOWS_STARTED: return fetchTvShowsStarted(state);
         case actionTypes.FETCH_TVSHOWS_FAILED: return fetchTvShowsFailed(state);

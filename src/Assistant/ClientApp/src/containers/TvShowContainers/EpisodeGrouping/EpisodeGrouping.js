@@ -4,7 +4,6 @@ import Episode from '../../../components/TvShowComponents/Episode/Episode';
 import EpisodeGroupingHeader from '../../../components/TvShowComponents/EpisodeGroupingHeader/EpisodeGroupingHeader';
 
 class EpisodeGrouping extends Component {
-
     state = {
         isCollapsed: true
     }
@@ -22,8 +21,8 @@ class EpisodeGrouping extends Component {
                     <EpisodeGroupingHeader />
                     {this.props.grouping.groupedCollection
                         .sort((a, b) => b.number - a.number)
-                        .map(e => 
-                            <Fragment  key={e.id}>
+                        .map(e =>
+                            <Fragment key={e.id}>
                                 <Episode episode={e} shouldLoadImg={!this.state.isCollapsed} />
                                 <div className={classes.Divider}></div>
                             </Fragment>
@@ -32,7 +31,6 @@ class EpisodeGrouping extends Component {
             </div>
         )
     }
-
 };
 
 export default EpisodeGrouping;

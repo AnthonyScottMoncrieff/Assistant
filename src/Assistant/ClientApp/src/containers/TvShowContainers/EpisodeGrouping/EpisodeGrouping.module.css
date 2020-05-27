@@ -1,17 +1,17 @@
-.EpisodeGrouping{
+.EpisodeGrouping {
     position: relative;
     border: 1px solid rgba(0,0,0,0.1);
     margin-bottom: 15px;
     border-radius: 3px;
 }
 
-.EpisodeGrouping:hover{
-    -webkit-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
-    box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
-}
+    .EpisodeGrouping:hover {
+        -webkit-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+        -moz-box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+        box-shadow: 6px 6px 16px -4px rgba(0,0,0,0.75);
+    }
 
-.Title{
+.Title {
     font-size: 23px;
     width: 100%;
     padding: 5px 0 5px 15px;
@@ -19,22 +19,23 @@
     background-color: rgba(0,0,0,0.1);
 }
 
-.EpisodeCollection{
+.EpisodeCollection {
     transition: height 0.3s;
     height: auto;
     overflow: hidden;
     display: inline-block;
-    width: 100%;;
+    width: 100%;
+    ;
 }
 
-.Collapsed{
+.Collapsed {
     height: 0;
 }
 
-.Divider{
+.Divider {
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.Divider:nth-last-child(1){
-    border-bottom: none;
-}
+    .Divider:nth-last-child(1) {
+        border-bottom: none;
+    }

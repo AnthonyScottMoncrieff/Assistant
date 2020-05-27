@@ -31,15 +31,15 @@ export class AuthorizeService {
         const user = await this.userManager.getUser();
         if (user.expired === true) {
             try {
-              //Attempt to sign in our user silently
-              const silentUser = await this.userManager.signinSilent(this.createArguments())
-              //Return refreshed access token
-              return silentUser && silentUser.access_token
+                //Attempt to sign in our user silently
+                const silentUser = await this.userManager.signinSilent(this.createArguments())
+                //Return refreshed access token
+                return silentUser && silentUser.access_token
             } catch (err) {
-              console.log('Silent login failed to refresh token');
-              this.updateState(null);
+                console.log('Silent login failed to refresh token');
+                this.updateState(null);
             }
-          }
+        }
         return user && user.access_token;
     }
 

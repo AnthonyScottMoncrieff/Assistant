@@ -40,7 +40,7 @@ export const initEpisodes = (showKey) => {
         dispatch(fetchEpisodesStarted());
         axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${showKey}&embed=episodes`)
             .then((response) => {
-                let episodes = response.data._embedded.episodes.map(x => {return { ...x, summary: stripHTMLTags(x.summary) } });
+                let episodes = response.data._embedded.episodes.map(x => { return { ...x, summary: stripHTMLTags(x.summary) } });
                 dispatch(setEpisodes(episodes, showKey));
             })
             .catch(error => {
