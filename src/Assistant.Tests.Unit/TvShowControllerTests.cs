@@ -106,7 +106,6 @@ namespace Assistant.Tests.Unit
             _userTVShowMappingManager.Verify(x => x.ManageAdditionAsync(It.IsAny<TvShow>()), Times.Once);
         }
 
-
         [Test]
         public async Task Delete_Should_Call_Correct_Dependencies_and_Return_Correct_Type_On_Happy_Path()
         {
