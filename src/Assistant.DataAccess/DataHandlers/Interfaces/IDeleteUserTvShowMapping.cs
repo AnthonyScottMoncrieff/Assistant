@@ -6,6 +6,6 @@ namespace Assistant.DataAccess.DataHandlers.Interfaces
 {
     public interface IDeleteUserTvShowMapping
     {
-        Task<ActionResponse<UserTVShowMapping>> DeleteUserTvShowMappingAsync(string userId, string showKey);
+        Task<ActionResponse<UserTVShowMapping>> Delete(string userId, string showKey);
     }
 }

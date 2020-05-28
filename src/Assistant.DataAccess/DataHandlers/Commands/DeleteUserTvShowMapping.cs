@@ -19,7 +19,7 @@ namespace Assistant.DataAccess.DataHandlers.Commands
             _logger = logger;
         }
 
-        public async Task<ActionResponse<UserTVShowMapping>> DeleteUserTvShowMappingAsync(string userId, string showKey)
+        public async Task<ActionResponse<UserTVShowMapping>> Delete(string userId, string showKey)
         {
             try
             {
