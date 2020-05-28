@@ -7,5 +7,6 @@ namespace Assistant.Domain.Interfaces
     public interface IUserTVShowMappingManager
     {
         Task<ActionResponse<UserTVShowMapping>> ManageAdditionAsync(TvShow tvShow);
+        Task<ActionResponse<UserTVShowMapping>> ManageDeletionAsync(string showKey);
     }
 }

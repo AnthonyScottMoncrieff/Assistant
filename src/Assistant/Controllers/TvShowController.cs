@@ -28,7 +28,7 @@ namespace Assistant.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetShows()
+        public async Task<IActionResult> GetShowsAsync()
         {
             var userId = _userContextManager.GetUserIdFromContext();
             var showsActionResponse = await _getTVShowsByUser.GetTvShowsByUserId(userId);
@@ -36,9 +36,16 @@ namespace Assistant.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostShow([FromBody]TvShow tvShow)
+        public async Task<IActionResult> PostShowAsync([FromBody]TvShow tvShow)
         {
             var response = await _userTVShowMappingManager.ManageAdditionAsync(tvShow);
+            return ReturnFromActionResponse(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteShowAsync([FromQuery] string showKey)
+        {
+            var response = await _userTVShowMappingManager.ManageDeletionAsync(showKey);
             return ReturnFromActionResponse(response);
         }
 

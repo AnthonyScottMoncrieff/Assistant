@@ -41,6 +41,7 @@ namespace Assistant
 
             serviceCollection.AddTransient<IGetTVShowsByUser, GetTVShowsByUser>();
             serviceCollection.AddTransient<IAddUserTVShowMapping, AddUserTVShowMapping>();
+            serviceCollection.AddTransient<IDeleteUserTvShowMapping, DeleteUserTvShowMapping>();
         }
 
         private static void RegisterExceptionless(IConfiguration configuration)

@@ -43,6 +43,7 @@ namespace Assistant.Tests.Unit
             _mapping = _fixture.Create<UserTVShowMapping>();
             _userTVShowMappingManager = new Mock<IUserTVShowMappingManager>();
             _userTVShowMappingManager.Setup(x => x.ManageAdditionAsync(It.IsAny<TvShow>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = true, Result = _mapping });
+            _userTVShowMappingManager.Setup(x => x.ManageDeletionAsync(It.IsAny<string>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = true, Result = null });
 
             _showController = new TvShowController(_getTVShowsByUser.Object, _logger.Object, _userContextManager.Object, _userTVShowMappingManager.Object);
         }
@@ -51,7 +52,7 @@ namespace Assistant.Tests.Unit
         public async Task Get_Should_Call_Correct_Dependencies_and_Return_Correct_Type_On_Happy_Path()
         {
             //Act
-            var response = await _showController.GetShows();
+            var response = await _showController.GetShowsAsync();
 
             //Assert
             Assert.AreEqual(response.GetType(), typeof(OkObjectResult));
@@ -66,7 +67,7 @@ namespace Assistant.Tests.Unit
             _getTVShowsByUser.Setup(x => x.GetTvShowsByUserId(It.IsAny<string>())).ReturnsAsync(new ActionResponse<IEnumerable<TvShow>> { WasSuccessful = false, Result = null, Message = "Error" });
 
             //Act
-            var response = await _showController.GetShows();
+            var response = await _showController.GetShowsAsync();
 
             //Assert
             Assert.AreEqual(response.GetType(), typeof(BadRequestObjectResult));
@@ -81,7 +82,7 @@ namespace Assistant.Tests.Unit
             var tvShow = new TvShow { ShowKey = "test-test", ShowName = "Test Test" };
 
             //Act
-            var response = await _showController.PostShow(tvShow);
+            var response = await _showController.PostShowAsync(tvShow);
 
             //Assert
             Assert.AreEqual(response.GetType(), typeof(OkObjectResult));
@@ -97,12 +98,44 @@ namespace Assistant.Tests.Unit
             var tvShow = new TvShow { ShowKey = "test-test", ShowName = "Test Test" };
 
             //Act
-            var response = await _showController.PostShow(tvShow);
+            var response = await _showController.PostShowAsync(tvShow);
 
             //Assert
             Assert.AreEqual(response.GetType(), typeof(BadRequestObjectResult));
             _logger.Verify(x => x.CommitAsync(), Times.Once);
             _userTVShowMappingManager.Verify(x => x.ManageAdditionAsync(It.IsAny<TvShow>()), Times.Once);
+        }
+
+
+        [Test]
+        public async Task Delete_Should_Call_Correct_Dependencies_and_Return_Correct_Type_On_Happy_Path()
+        {
+            //Arrange
+            var showKey = "test-test";
+
+            //Act
+            var response = await _showController.DeleteShowAsync(showKey);
+
+            //Assert
+            Assert.AreEqual(response.GetType(), typeof(OkObjectResult));
+            _logger.Verify(x => x.CommitAsync(), Times.Once);
+            _userTVShowMappingManager.Verify(x => x.ManageDeletionAsync(showKey), Times.Once);
+        }
+
+        [Test]
+        public async Task Delete_Should_Call_Correct_Dependencies_and_Return_Correct_Type_On_Query_Exception()
+        {
+            //Arrange
+            _userTVShowMappingManager.Setup(x => x.ManageDeletionAsync(It.IsAny<string>())).ReturnsAsync(new ActionResponse<UserTVShowMapping> { WasSuccessful = false, Result = null, Message = "Error" });
+            var showKey = "test-test";
+
+            //Act
+            var response = await _showController.DeleteShowAsync(showKey);
+
+            //Assert
+            Assert.AreEqual(response.GetType(), typeof(BadRequestObjectResult));
+            _logger.Verify(x => x.CommitAsync(), Times.Once);
+            _userTVShowMappingManager.Verify(x => x.ManageDeletionAsync(showKey), Times.Once);
         }
     }
 }
