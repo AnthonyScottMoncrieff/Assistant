@@ -9,6 +9,7 @@ import Add from '../../../components/UI/Add/Add';
 import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
+import { textSpanIsEmpty } from 'typescript';
 
 class TvShowRangeManager extends Component {
     state = {
@@ -27,7 +28,12 @@ class TvShowRangeManager extends Component {
     }
 
     openDeleteTvshowModalHandler = (show) => {
-        this.dialogContent = <ShowDeleteDialog show={show} cancelSubmissionHandler={this.closeModalHandler} submitClickHandler={() => this.props.onDeleteTvShow(show.showKey, this.closeModalHandler)} />;
+        this.dialogContent = <ShowDeleteDialog 
+            show={show} 
+            cancelSubmissionHandler={this.closeModalHandler} 
+            submitClickHandler={() => this.props.onDeleteTvShow(show.showKey, this.closeModalHandler)}
+            disabled={this.props.deleteLoading}
+            error={this.props.deleteError} />;
         this.setState({ shouldShowModal: true });
     }
 
@@ -37,7 +43,7 @@ class TvShowRangeManager extends Component {
 
     getShows = () => {
         let shows = <Spinner />;
-        if (!this.props.loading && !this.props.error) {
+        if (!this.props.fetchLoading && !this.props.fetchError) {
             shows = this.props.shows.map(show =>
                 <div className={classes.ShowContainer} key={show.showKey}>
                     <Link className={classes.Link} to={`/tv-shows/${show.showKey}`}>
@@ -50,7 +56,7 @@ class TvShowRangeManager extends Component {
                 </div>
             );
         }
-        else if (this.props.error)
+        else if (this.props.fetchError)
             shows = (<div>ERROR</div>);
 
         return shows;
@@ -73,8 +79,10 @@ class TvShowRangeManager extends Component {
 const mapStateToProps = state => {
     return {
         shows: state.tvShows.shows,
-        loading: state.tvShows.tvShowsLoading,
-        error: state.tvShows.tvShowFetchError
+        fetchLoading: state.tvShows.tvShowsLoading,
+        fetchError: state.tvShows.tvShowFetchError,
+        deleteLoading: state.tvShows.tvShowDeletionLoading,
+        deleteError: state.tvShows.tvShowDeletionError
     };
 };
 

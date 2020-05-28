@@ -66,11 +66,15 @@
     }
 
         .ShowContainer:nth-child(3n + 1) {
-            margin-left: auto;
+            margin-left: 0;
         }
 
         .ShowContainer:nth-child(2n) {
             margin-left: 2%;
+        }
+
+        .ShowContainer:nth-child(2n + 1) {
+            margin-left: 0;
         }
 }
 
@@ -81,5 +85,9 @@
 
         .ShowContainer:nth-child(3n + 1) {
             margin-left: auto;
+        }
+
+        .ShowContainer:nth-child(2n) {
+            margin-left: 0;
         }
 }
