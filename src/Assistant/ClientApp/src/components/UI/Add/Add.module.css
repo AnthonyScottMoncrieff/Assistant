@@ -1,5 +1,9 @@
+.AddRoot{
+    text-align: right;
+}
+
 .AddContainer {
-    display: block;
+    display: inline-block;
     margin-bottom: 21px;
     text-align: right;
     margin-right: 2%;
