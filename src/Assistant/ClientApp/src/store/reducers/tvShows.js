@@ -31,7 +31,9 @@ const submitTvShow = (state, action) => {
 
 const deleteTvShow = (state, action) => {
     return updateObject(state, {
-        shows: state.shows.filter(x => x.showKey !== action.showKey)
+        shows: state.shows.filter(x => x.showKey !== action.showKey),
+        tvShowDeletionLoading: false,
+        tvShowDeletionError: false
     })
 }
 
