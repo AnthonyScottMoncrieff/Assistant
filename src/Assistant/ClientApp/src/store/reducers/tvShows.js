@@ -7,7 +7,10 @@ const initialState = {
     tvShowsLoading: false,
 
     tvShowSubmissionLoading: false,
-    tvShowSubmissionError: false
+    tvShowSubmissionError: false,
+
+    tvShowDeletionLoading: false,
+    tvShowDeletionError: false
 }
 
 const setTvShows = (state, action) => {
@@ -23,6 +26,12 @@ const submitTvShow = (state, action) => {
         shows: [...state.shows, action.show],
         tvShowSubmissionError: false,
         tvShowSubmissionLoading: false
+    })
+}
+
+const deleteTvShow = (state, action) => {
+    return updateObject(state, {
+        shows: state.shows.filter(x => x.showKey !== action.showKey)
     })
 }
 
@@ -42,6 +51,14 @@ const submitTvShowsFailed = (state) => {
     return updateObject(state, { tvShowSubmissionError: true, tvShowSubmissionLoading: false });
 }
 
+const deleteTvShowsStarted = (state) => {
+    return updateObject(state, { tvShowDeletionError: false, tvShowDeletionLoading: true });
+}
+
+const deleteTvShowsFailed = (state) => {
+    return updateObject(state, { tvShowDeletionError: true, tvShowDeletionLoading: false });
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_TVSHOWS: return setTvShows(state, action);
@@ -50,6 +67,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SUBMIT_TVSHOW: return submitTvShow(state, action);
         case actionTypes.SUBMIT_TVSHOW_STARTED: return submitTvShowsStarted(state);
         case actionTypes.SUBMIT_TVSHOW_FAILED: return submitTvShowsFailed(state);
+        case actionTypes.DELETE_TVSHOW: return deleteTvShow(state, action);
+        case actionTypes.DELETE_TVSHOW_STARTED: return deleteTvShowsStarted(state);
+        case actionTypes.DELETE_TVSHOW_FAILED: return deleteTvShowsFailed(state);
         default: return state;
     }
 }

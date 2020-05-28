@@ -88,8 +88,8 @@ export const initTvShowSubmission = (show, key, closeDialog) => {
         authService.getAccessToken()
             .then(token => {
                 let postData = configurePost(show, key);
-                let headers = configureAuthHeader(token);
-                axios.post('/api/tvshows', postData, headers)
+                let header = configureAuthHeader(token);
+                axios.post('/api/tvshows', postData, header)
                     .then(response => {
                         dispatch(submitTvShow(response.data.result.tvShow));
                         closeDialog();
@@ -101,3 +101,43 @@ export const initTvShowSubmission = (show, key, closeDialog) => {
     }
 }
 /* END TvShow Submit Actions */
+
+/* START TvShow delete Actions */
+
+export const deleteTvShow = (showKey) => {
+    return {
+        type: actionTypes.DELETE_TVSHOW,
+        showKey: showKey
+    }
+}
+
+export const deleteTvShowStarted = () => {
+    return {
+        type: actionTypes.DELETE_TVSHOW_STARTED
+    };
+};
+
+export const deleteTvShowFailed = () => {
+    return {
+        type: actionTypes.DELETE_TVSHOW_FAILED
+    };
+};
+
+export const initTvShowDeletion = (key, closeDialog) => {
+    return dispatch => {
+        dispatch(deleteTvShowStarted());
+        authService.getAccessToken()
+            .then(token => {
+                let header = configureAuthHeader(token);
+                axios.delete(`/api/tvshows?showKey=${key}`, header)
+                    .then(_ => {
+                        dispatch(deleteTvShow(key));
+                        closeDialog();
+                    })
+                    .catch(_ => {
+                        dispatch(deleteTvShowFailed())
+                    })
+            })
+    }
+}
+/* END TvShow delete Actions */
