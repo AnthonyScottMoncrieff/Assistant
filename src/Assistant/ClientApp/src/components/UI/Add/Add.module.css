@@ -2,12 +2,17 @@
     text-align: right;
 }
 
+.NoDisplay{
+    display: none;
+}
+
 .AddContainer {
     display: inline-block;
     margin-bottom: 21px;
     text-align: right;
     margin-right: 2%;
     position: relative;
+    border-radius: 100px;
 }
 
 .AddContainer:hover .Label{
@@ -47,6 +52,7 @@
     padding-top: 20px;
     text-align: left;
     padding-left: 16px;
+    font-weight: 500;
 }
 
     .Add:hover {

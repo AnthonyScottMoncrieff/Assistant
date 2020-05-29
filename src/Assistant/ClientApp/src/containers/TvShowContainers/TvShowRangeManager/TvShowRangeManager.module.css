@@ -37,11 +37,11 @@
 
 .Delete {
     position: absolute;
-    right: 3%;
+    right: 4%;
     color: white;
     background-color: rgba(255, 0, 0, 0.61);
     border-radius: 50px;
-    top: 1%;
+    top: 2%;
     z-index: 99;
     width: 37px;
     text-align: center;
@@ -50,14 +50,16 @@
     font-size: 21px;
     cursor: pointer;
     display: none;
-    transition: background-color 0.1s, width 0.1s, height 0.1s, padding-top 0.1s;
+    transition: transform 0.1s;
 }
 
     .Delete:hover {
         background-color: red;
-        padding-top: 3px;
-        width: 40px;
-        height: 38px;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
     }
 
 @media (max-width: 1200px) {
@@ -79,6 +81,11 @@
 }
 
 @media (max-width: 767px) {
+
+    .Delete{
+        display: inherit;
+    }
+
     .ShowContainer {
         width: 100%;
     }

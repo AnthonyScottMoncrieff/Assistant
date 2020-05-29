@@ -67,7 +67,7 @@ class TvShowRangeManager extends Component {
         return (
             <div className={classes.TvShowRangeManager}>
                 <Modal show={this.state.shouldShowModal} modalClosed={this.closeModalHandler}>{this.dialogContent}</Modal>
-                <Add clicked={this.openAddTvshowModalHandler} />
+                <Add clicked={this.openAddTvshowModalHandler} visible={!this.props.fetchLoading} />
                 <div>
                     {shows}
                 </div>
