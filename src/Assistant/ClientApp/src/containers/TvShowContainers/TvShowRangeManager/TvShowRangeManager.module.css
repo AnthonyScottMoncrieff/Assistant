@@ -50,7 +50,7 @@
     font-size: 21px;
     cursor: pointer;
     display: none;
-    transition: transform 0.1s;
+    transition: transform 0.1s, background-color 0.3s;
 }
 
     .Delete:hover {
