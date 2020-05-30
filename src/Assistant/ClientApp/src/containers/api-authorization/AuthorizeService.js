@@ -29,7 +29,7 @@ export class AuthorizeService {
     async getAccessToken() {
         await this.ensureUserManagerInitialized();
         const user = await this.userManager.getUser();
-        if (user.expired === true) {
+        if (user.expired) {
             try {
                 //Attempt to sign in our user silently
                 const silentUser = await this.userManager.signinSilent(this.createArguments())

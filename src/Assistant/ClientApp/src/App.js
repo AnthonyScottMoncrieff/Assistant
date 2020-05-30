@@ -5,10 +5,17 @@ import Home from './components/Home/Home';
 import AuthorizeRoute from './containers/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './containers/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './containers/api-authorization/ApiAuthorizationConstants';
-import TvShowRangeManager from './containers/TvShowContainers/TvShowRangeManager/TvShowRangeManager';
-import FullTvShowManager from './containers/TvShowContainers/FullTvShowManager/FullTvShowManager';
 
 import './custom.css'
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
+
+const asyncTvShowRangeManager = asyncComponent(() => {
+    return import('./containers/TvShowContainers/TvShowRangeManager/TvShowRangeManager');
+})
+
+const asyncFullTvShowManager = asyncComponent(() => {
+    return import('./containers/TvShowContainers/FullTvShowManager/FullTvShowManager');
+})
 
 export default class App extends Component {
     static displayName = App.name;
@@ -17,8 +24,8 @@ export default class App extends Component {
         return (
             <Layout>
                 <Route exact path='/' component={Home} />
-                <AuthorizeRoute exact path='/tv-shows' component={TvShowRangeManager} />
-                <AuthorizeRoute exact path='/tv-shows/:showKey' component={FullTvShowManager} />
+                <AuthorizeRoute exact path='/tv-shows' component={asyncTvShowRangeManager} />
+                <AuthorizeRoute exact path='/tv-shows/:showKey' component={asyncFullTvShowManager} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );
