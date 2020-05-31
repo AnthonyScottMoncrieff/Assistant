@@ -33,7 +33,7 @@ export class AuthorizeService {
         if (user.expired) {
             try {
                 //Attempt to sign in our user silently
-                const silentUser = await this.userManager.signinSilent(this.createArguments())
+                let silentUser = await this.userManager.signinSilent(this.createArguments())
                 //Return refreshed access token
                 return silentUser && silentUser.access_token
             } catch (err) {
