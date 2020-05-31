@@ -37,8 +37,8 @@ export class AuthorizeService {
                 //Return refreshed access token
                 return silentUser && silentUser.access_token
             } catch (err) {
-                console.log('Silent login failed to refresh token');
-                this.updateState(null);
+                await this.userManager.removeUser();
+                this.updateState(undefined);
             }
         }
         return user && user.access_token;
