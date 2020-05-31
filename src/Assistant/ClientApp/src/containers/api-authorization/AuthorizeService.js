@@ -1,6 +1,5 @@
 import { UserManager, WebStorageStateStore } from 'oidc-client';
 import { ApplicationPaths, ApplicationName } from './ApiAuthorizationConstants';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class AuthorizeService {
     _callbacks = [];
