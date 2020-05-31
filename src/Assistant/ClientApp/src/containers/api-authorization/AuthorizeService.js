@@ -1,12 +1,13 @@
 import { UserManager, WebStorageStateStore } from 'oidc-client';
 import { ApplicationPaths, ApplicationName } from './ApiAuthorizationConstants';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 export class AuthorizeService {
     _callbacks = [];
     _nextSubscriptionId = 0;
     _user = null;
     _isAuthenticated = false;
-    _userFetchPromise = null;
+    _userManagementSetup = null;
 
     // By default pop ups are disabled because they don't work properly on Edge.
     // If you want to enable pop up authentication simply set this flag to false.
@@ -156,31 +157,47 @@ export class AuthorizeService {
             return;
         }
 
-        //Prevent request duplication on initialization
-        if(this._userFetchPromise === null)
-            this._userFetchPromise = fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
+        let userManagementSetup = this._userManagementSetup || new Promise((resolve) => {
+            fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl)
+                .then((response) => {
+                    resolve(response)
+                })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Could not load settings for '${ApplicationName}'`);
+                }
 
-        let response = await this._userFetchPromise;
-        if (!response.ok) {
-            throw new Error(`Could not load settings for '${ApplicationName}'`);
+                return response.json();
+
+            })
+            .then(settings => {
+                settings.automaticSilentRenew = true;
+                settings.includeIdTokenInSilentRenew = true;
+                settings.userStore = new WebStorageStateStore({
+                    prefix: ApplicationName
+                });
+
+                this.userManager = new UserManager(settings);
+
+                this._userFetchPromise = null;
+
+                this.userManager.events.addUserSignedOut(async () => {
+                    await this.userManager.removeUser();
+                    this.updateState(undefined);
+                });
+
+
+
+                return this.userManager;
+            });
+
+        if (this._userManagementSetup === null) {
+            this._userManagementSetup = userManagementSetup;
         }
 
-        //If multiple parties are using the promise, then the response must be cloned to avoid blocking
-        let settings = await response.clone().json();
-        settings.automaticSilentRenew = true;
-        settings.includeIdTokenInSilentRenew = true;
-        settings.userStore = new WebStorageStateStore({
-            prefix: ApplicationName
-        });
-
-        this.userManager = new UserManager(settings);
-
-        this.userManager.events.addUserSignedOut(async () => {
-            await this.userManager.removeUser();
-            this.updateState(undefined);
-        });
-
-        this._userFetchPromise = null;
+        await this._userManagementSetup;
+        this._userManagementSetup = null;
     }
 
     static get instance() { return authService }
