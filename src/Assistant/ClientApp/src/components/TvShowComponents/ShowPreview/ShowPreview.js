@@ -8,7 +8,7 @@ const showPreview = (props) => {
 
     return (
         <div className={classes.ShowPreview}>
-            <img src={props.showImg} />
+            <img src={props.showImg} alt='show preview'/>
             <div className={classes.ShowDetail}>
                 <div className={classes.ShowName}>{props.showName}</div>
                 <div className={classes.ShowDescription}>{cutSummary}</div>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import authService from '../../containers/api-authorization/AuthorizeService';
-import { stripHTMLTags } from '../../shared/utilities/utilities';
+import { stripHTMLTags, toHttps } from '../../shared/utilities/utilities';
 
 const configureAuthHeader = (token) => {
     return {
@@ -17,7 +17,7 @@ const configurePost = (show, key) => {
     return {
         showName: show.name,
         showKey: key,
-        thumbnailUrl: imgUrl,
+        thumbnailUrl: toHttps(imgUrl),
         summary: show.summary
     }
 }

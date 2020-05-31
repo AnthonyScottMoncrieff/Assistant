@@ -9,7 +9,6 @@ import Add from '../../../components/UI/Add/Add';
 import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
-import { textSpanIsEmpty } from 'typescript';
 
 class TvShowRangeManager extends Component {
     state = {

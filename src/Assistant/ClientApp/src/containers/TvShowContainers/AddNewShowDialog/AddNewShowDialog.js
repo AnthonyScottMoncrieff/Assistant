@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import classes from './AddNewShowDialog.module.css';
 import Input from '../../../components/UI/Input/Input';
-import { updateObject } from '../../../shared/utilities/utilities';
+import { updateObject, toHttps } from '../../../shared/utilities/utilities';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import ShowPreview from '../../../components/TvShowComponents/ShowPreview/ShowPreview';
@@ -83,7 +83,7 @@ class AddNewShowDialog extends Component {
                 : showRequest.selectedShow === null && showRequest.fetchingShow
                     ? <Spinner />
                     : <ShowPreview
-                        showImg={showRequest.selectedShow.image.medium}
+                        showImg={toHttps(showRequest.selectedShow.image.medium)}
                         showName={showRequest.selectedShow.name}
                         showSummary={showRequest.selectedShow.summary} />;
         let submit = showRequest.selectedShow !== null

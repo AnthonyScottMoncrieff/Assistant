@@ -9,6 +9,12 @@ export const stripHTMLTags = (input) => {
     return input === null ? input : input.replace(/<[^>]{1,9}>/g, "");
 }
 
+export const toHttps = (input) => {
+    let matchExpression = /^https:/g;
+    let replaceExpression = /^http:/g
+    return input.match(matchExpression) ? input : input.replace(replaceExpression, 'https:');
+}
+
 export const groupByShallowProperty = (collection, property) => {
     let reduction = collection.reduce((accumulator, currentValue) => {
         if (!accumulator["groupings"]) accumulator["groupings"] = [];
