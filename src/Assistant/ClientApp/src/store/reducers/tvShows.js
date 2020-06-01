@@ -22,6 +22,8 @@ const setTvShows = (state, action) => {
 }
 
 const submitTvShow = (state, action) => {
+    if(state.shows.filter(x => x.showKey === action.show.showKey).length > 0)
+        return state;
     return updateObject(state, {
         shows: [...state.shows, action.show],
         tvShowSubmissionError: false,
