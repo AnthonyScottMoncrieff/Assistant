@@ -186,8 +186,6 @@ export class AuthorizeService {
                     this.updateState(undefined);
                 });
 
-
-
                 return this.userManager;
             });
 
