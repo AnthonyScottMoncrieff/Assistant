@@ -5,7 +5,7 @@ export const saveEpisodesToLocalstorage = (episodes, showKey) => {
         savedEpisodes = {};
 
     savedEpisodes[showKey] = { 
-        date: `${dateNow.getFullYear()}-${dateNow.getMonth() + 1}-${dateNow.getDate()} ${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`,
+        date: dateNow.toISOString(),
         episodes
     }
     localStorage.setItem('episodes', JSON.stringify(savedEpisodes));

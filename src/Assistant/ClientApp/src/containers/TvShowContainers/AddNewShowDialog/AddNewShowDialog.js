@@ -8,6 +8,7 @@ import ShowPreview from '../../../components/TvShowComponents/ShowPreview/ShowPr
 import axios from 'axios';
 import * as actions from '../../../store/actions'
 import { connect } from 'react-redux';
+import Error from '../../../components/UI/Error/Error';
 
 class AddNewShowDialog extends Component {
     state = {
@@ -26,13 +27,22 @@ class AddNewShowDialog extends Component {
             },
             selectedShow: null,
             fetchingShow: false,
-            errorFetchingShow: false,
+            error: false,
+            errorMessage: "",
             searchTerm: ""
         }
     }
 
     submitClickHandler = () => {
-        this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm, () => this.cancelSubmissionHandler());
+        if (this.props.shows.filter(x => x.showKey === this.state.tvShowRequest.searchTerm).length === 0){
+            let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { error: false, errorMessage: "" });
+            this.setState({ tvShowRequest: updatedTvshowRequest });
+            this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm, () => this.cancelSubmissionHandler());
+        }
+        else{
+            let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { error: true, errorMessage: "ERROR: You attempted to add a duplicate show" });
+            this.setState({ tvShowRequest: updatedTvshowRequest });
+        }
     }
 
     cancelSubmissionHandler = () => {
@@ -48,11 +58,11 @@ class AddNewShowDialog extends Component {
         this.setState({ tvShowRequest: updateObject(this.state.tvShowRequest, { fetchingShow: true, searchTerm: parsedValue }) });
         axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${parsedValue}`)
             .then((response) => {
-                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { selectedShow: response.data, fetchingShow: false, errorFetchingShow: false });
+                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { selectedShow: response.data, fetchingShow: false, error: false, errorMessage: "" });
                 this.setState({ tvShowRequest: updatedTvshowRequest });
             })
             .catch(err => {
-                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { fetchingShow: false, errorFetchingShow: true });
+                let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { fetchingShow: false, error: true, errorMessage: "ERROR: Cannot find show with this name" });
                 this.setState({ tvShowRequest: updatedTvshowRequest });
             })
     }
@@ -76,8 +86,8 @@ class AddNewShowDialog extends Component {
 
     render() {
         let showRequest = this.state.tvShowRequest;
-        let selectedShowDisplay = showRequest.errorFetchingShow
-            ? <div>ERROR FETCHING SHOW</div>
+        let selectedShowDisplay = showRequest.error
+            ? null
             : showRequest.selectedShow === null && !showRequest.fetchingShow
                 ? null
                 : showRequest.selectedShow === null && showRequest.fetchingShow
@@ -86,7 +96,7 @@ class AddNewShowDialog extends Component {
                         showImg={toHttps(showRequest.selectedShow.image.medium)}
                         showName={showRequest.selectedShow.name}
                         showSummary={showRequest.selectedShow.summary} />;
-        let submit = showRequest.selectedShow !== null
+        let submit = showRequest.selectedShow !== null && !showRequest.error
             ? <Fragment>
                 <Button btnType="Success" clicked={this.submitClickHandler} disabled={this.props.loading}>Submit</Button>
                 <Button btnType="Danger" clicked={this.cancelSubmissionHandler}>Cancel</Button>
@@ -114,6 +124,7 @@ class AddNewShowDialog extends Component {
                 <div className={classes.SubmitRegion}>
                     {submit}
                 </div>
+                <Error isVisible={this.state.tvShowRequest.error}>{this.state.tvShowRequest.errorMessage}</Error>
             </div>
         )
     }
@@ -122,7 +133,8 @@ class AddNewShowDialog extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.tvShows.tvShowSubmissionLoading,
-        error: state.tvShows.tvShowSubmissionError
+        error: state.tvShows.tvShowSubmissionError,
+        shows: state.tvShows.shows
     };
 };
 
