@@ -2,14 +2,31 @@ import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LoginMenu } from '../api-authorization/LoginMenu';
-import styles from './NavMenu.module.css';
+import classes from './NavMenu.module.css';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
 
     state = {
-        collapsed: true
+        collapsed: true,
+        shouldShowShadow: false
     };
+
+    componentDidMount = () => {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        let scrollPosition = window.scrollY;
+        if(scrollPosition === 0)
+            this.setState({shouldShowShadow: false});
+        else
+            this.setState({shouldShowShadow: true});
+    }
 
     toggleNavbar = () => {
         let width = window.innerWidth;
@@ -20,9 +37,12 @@ export class NavMenu extends Component {
     }
 
     render() {
+
+        let shadow = this.state.shouldShowShadow ? classes.Shadow : classes.NoShadow;
+
         return (
-            <header>
-                <Navbar className={`navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 ${styles.Nav}`} light>
+            <header className={classes.Header}>
+                <Navbar className={`navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 ${classes.Nav} ${classes.FixedNav} ${shadow}`} light>
                     <Container>
                         <NavbarBrand tag={Link} to="/">Assistant</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />

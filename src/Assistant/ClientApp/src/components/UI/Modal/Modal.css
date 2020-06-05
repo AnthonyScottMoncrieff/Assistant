@@ -1,0 +1,40 @@
+.Modal {
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 15%;
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+
+.ModalIn{
+    animation: modalIn 0.5s forwards;
+}
+
+.ModalOut{
+    animation: modalOut 0.5s forwards;
+}
+
+@media (min-width: 800px) {
+    .Modal {
+        width: 760px;
+        left: calc(50% - 380px);
+    }
+}
+
+@keyframes modalIn{
+    0% {transform: translateY(-100%); opacity: 0;}
+    50% {transform: translateY(50%); opacity: 0.5;}
+    100% {transform: translateY(0); opacity: 1;}
+}
+
+@keyframes modalOut{
+    0% {transform: translateY(0); opacity: 1;}
+    50% {transform: translateY(50%); opacity: 0.5;}
+    100% {transform: translateY(-100%); opacity: 0;}
+}

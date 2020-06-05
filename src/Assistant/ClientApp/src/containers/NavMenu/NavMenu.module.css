@@ -1,4 +1,8 @@
-﻿.Nav a.navbar-brand {
+﻿.Nav{
+    transition: box-shadow 0.3s;
+}
+
+.Nav a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -10,4 +14,28 @@
 
 .Nav button:focus {
     outline: none;
+}
+
+.FixedNav{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+    top: 0;
+}
+
+.NoShadow{
+    -webkit-box-shadow: 0px 10px 21px -15px rgba(0,0,0,0);
+    -moz-box-shadow: 0px 10px 21px -15px rgba(0,0,0,0);
+    box-shadow: 0px 10px 21px -15px rgba(0,0,0,0);
+}
+
+.Shadow{
+    -webkit-box-shadow: 0px 10px 21px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 21px -15px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 21px -15px rgba(0,0,0,0.75);
+}
+
+.Header{
+    margin-bottom: 70px;
 }
