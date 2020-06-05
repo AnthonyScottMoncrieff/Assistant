@@ -14,3 +14,13 @@
     font-weight: 700;
     vertical-align: middle;
 }
+
+@media (max-width: 767px) {
+    .EpisodeImage{
+        width: 0;
+        display: none;
+    }
+    .EpisodeName, .EpisodeNumber, .EpisodeReleaseDate{
+        width: 30%;
+    }
+}

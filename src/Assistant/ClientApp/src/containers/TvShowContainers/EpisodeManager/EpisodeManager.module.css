@@ -24,3 +24,9 @@
 .StyleIndex {
     margin-bottom: 10px;
 }
+
+@media (max-width: 469px) {
+    .FutureColor{
+        vertical-align: super;
+    }
+}

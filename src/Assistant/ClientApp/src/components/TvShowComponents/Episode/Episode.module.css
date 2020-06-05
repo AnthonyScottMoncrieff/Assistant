@@ -45,3 +45,30 @@
     -webkit-filter: blur(9px);
     filter: blur(9px);
 }
+
+
+@media (max-width: 1199px) {
+    .EpisodeImg{
+        width: 152px;
+        height: 84px;
+    }
+}
+
+@media (max-width: 991px) {
+    .EpisodeImg{
+        width: 134px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 767px) {
+    .EpisodeImg{
+        display: none;
+    }
+    .ImageContainer{
+        width: 0;
+    }
+    .Name, .Number, .Date{
+        width: 30%;
+    }
+}
