@@ -56,3 +56,9 @@
 .Header{
     margin-bottom: 70px;
 }
+
+@media (max-width: 575px) {
+    .Nav li a{
+        padding-left: 10px!important;
+    }
+}
