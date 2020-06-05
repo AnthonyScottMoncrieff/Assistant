@@ -1,17 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink as RRNavLink } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
+import classes from './Styles/LoginMenu.module.css';
 
 export class LoginMenu extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            isAuthenticated: false,
-            userName: null
-        };
+    state = {
+        isAuthenticated: false,
+        userName: null
     }
 
     componentDidMount() {
@@ -47,10 +45,10 @@ export class LoginMenu extends Component {
     authenticatedView(userName, profilePath, logoutPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" to={profilePath} onClick={this.props.navClicked}>Account</NavLink>
+                <NavLink tag={RRNavLink} activeClassName={classes.Active} className="text-dark" to={profilePath} onClick={this.props.navClicked}>Account</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" to={logoutPath} onClick={this.props.navClicked}>Logout</NavLink>
+                <NavLink tag={RRNavLink} activeClassName={classes.Active} className="text-dark" to={logoutPath} onClick={this.props.navClicked}>Logout</NavLink>
             </NavItem>
         </Fragment>);
     }
@@ -58,10 +56,10 @@ export class LoginMenu extends Component {
     anonymousView(registerPath, loginPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" to={registerPath} onClick={this.props.navClicked}>Register</NavLink>
+                <NavLink tag={RRNavLink} activeClassName={classes.Active} className="text-dark" to={registerPath} onClick={this.props.navClicked}>Register</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" to={loginPath} onClick={this.props.navClicked}>Login</NavLink>
+                <NavLink tag={RRNavLink} activeClassName={classes.Active} className="text-dark" to={loginPath} onClick={this.props.navClicked}>Login</NavLink>
             </NavItem>
         </Fragment>);
     }

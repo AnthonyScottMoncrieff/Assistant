@@ -1,5 +1,18 @@
 ﻿.Nav{
     transition: box-shadow 0.3s;
+    padding: 0 10px;
+}
+
+.Brand{
+    min-height:50px;
+    padding-top: 10px;
+}
+
+.Nav li a{
+    height:50px;
+    padding-top: 12px;
+    border-radius: 4px;
+    margin: 2px 0;
 }
 
 .Nav a.navbar-brand {
@@ -22,6 +35,10 @@
     background-color: white;
     z-index: 100;
     top: 0;
+}
+
+.Active{
+    background-color: rgba(211, 218, 230, 0.5);
 }
 
 .NoShadow{
