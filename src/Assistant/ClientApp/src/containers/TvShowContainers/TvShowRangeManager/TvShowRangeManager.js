@@ -41,7 +41,7 @@ class TvShowRangeManager extends Component {
     }
 
     getShows = () => {
-        let shows = <Spinner />;
+        let shows = <Spinner>Loading...</Spinner>;
         if (!this.props.fetchLoading && !this.props.fetchError) {
             shows = this.props.shows.map(show =>
                 <div className={classes.ShowContainer} key={show.showKey}>

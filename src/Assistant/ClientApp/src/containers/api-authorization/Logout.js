@@ -3,19 +3,16 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { QueryParameterNames, LogoutActions, ApplicationPaths } from './ApiAuthorizationConstants';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
 export class Logout extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            message: undefined,
-            isReady: false,
-            authenticated: false
-        };
+    state = {
+        message: undefined,
+        isReady: false,
+        authenticated: false
     }
 
     componentDidMount() {
@@ -53,9 +50,9 @@ export class Logout extends Component {
             const action = this.props.action;
             switch (action) {
                 case LogoutActions.Logout:
-                    return (<div>Processing logout</div>);
+                    return (<Spinner>Processing logout</Spinner>);
                 case LogoutActions.LogoutCallback:
-                    return (<div>Processing logout callback</div>);
+                    return (<Spinner>Processing logout callback</Spinner>);
                 case LogoutActions.LoggedOut:
                     return (<div>{message}</div>);
                 default:
@@ -73,7 +70,7 @@ export class Logout extends Component {
                 case AuthenticationResultStatus.Redirect:
                     break;
                 case AuthenticationResultStatus.Success:
-                    await this.navigateToReturnUrl(returnUrl);
+                    window.location.replace('/');
                     break;
                 case AuthenticationResultStatus.Fail:
                     this.setState({ message: result.message });
@@ -95,7 +92,7 @@ export class Logout extends Component {
                 // is when we are doing a redirect sign in flow.
                 throw new Error('Should not redirect.');
             case AuthenticationResultStatus.Success:
-                await this.navigateToReturnUrl(this.getReturnUrl(result.state));
+                window.location.replace('/');
                 break;
             case AuthenticationResultStatus.Fail:
                 this.setState({ message: result.message });

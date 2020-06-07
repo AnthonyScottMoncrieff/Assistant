@@ -18,7 +18,7 @@ class EpisodeManager extends Component {
     }
 
     render() {
-        let episodeCollection = <Spinner />;
+        let episodeCollection = <Spinner>Loading...</Spinner>;
         let upcomingEpisode = null;
         if (!this.props.episodesLoading && !this.props.error) {
             let show = this.props.showEpisodes.filter(x => x.showKey === this.props.showKey)[0];

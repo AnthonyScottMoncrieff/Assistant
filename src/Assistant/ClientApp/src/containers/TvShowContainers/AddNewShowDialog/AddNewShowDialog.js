@@ -91,7 +91,7 @@ class AddNewShowDialog extends Component {
             : showRequest.selectedShow === null && !showRequest.fetchingShow
                 ? null
                 : showRequest.selectedShow === null && showRequest.fetchingShow
-                    ? <Spinner />
+                    ? <Spinner>Loading...</Spinner>
                     : <ShowPreview
                         showImg={toHttps(showRequest.selectedShow.image.medium)}
                         showName={showRequest.selectedShow.name}

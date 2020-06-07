@@ -12,7 +12,7 @@ class FullTvShowManager extends Component {
     }
 
     render() {
-        let show = <Spinner />;
+        let show = <Spinner>Loading...</Spinner>;
         let episodes = null;
         if (!this.props.tvShowsloading) {
             show = (
