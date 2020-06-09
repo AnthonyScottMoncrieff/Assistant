@@ -9,7 +9,7 @@ import Add from '../../../components/UI/Add/Add';
 import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
-import { NavLink } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 class TvShowRangeManager extends Component {
     state = {
@@ -65,16 +65,18 @@ class TvShowRangeManager extends Component {
     render() {
         let shows = this.getShows();
         return (
-            <div className={classes.TvShowRangeManager}>
-                <Modal show={this.state.shouldShowModal} modalClosed={this.closeModalHandler}>{this.dialogContent}</Modal>
-                <div>
-                    <div className={classes.Title}>TV Shows</div>
-                    <Add clicked={this.openAddTvshowModalHandler} visible={!this.props.fetchLoading} />
+            <Container>
+                <div className={classes.TvShowRangeManager}>
+                    <Modal show={this.state.shouldShowModal} modalClosed={this.closeModalHandler}>{this.dialogContent}</Modal>
+                    <div>
+                        <div className={classes.Title}>TV Shows</div>
+                        <Add clicked={this.openAddTvshowModalHandler} visible={!this.props.fetchLoading} />
+                    </div>
+                    <div className={classes.ShowCollection}>
+                        {shows}
+                    </div>
                 </div>
-                <div className={classes.ShowCollection}>
-                    {shows}
-                </div>
-            </div>
+            </Container>
         )
     }
 }
