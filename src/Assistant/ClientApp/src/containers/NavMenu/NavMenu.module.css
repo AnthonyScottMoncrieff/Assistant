@@ -4,15 +4,17 @@
 }
 
 .Brand{
-    min-height:50px;
-    padding-top: 10px;
+    min-height: 50px;
+    font-family: Parisienne;
+    font-weight: 700;
+    font-size: 46px;
+    padding: 31px 0 0 0;
+    line-height: 0;
 }
 
 .Nav li a{
     height:50px;
     padding-top: 12px;
-    border-radius: 4px;
-    margin: 2px 0;
 }
 
 .Nav a.navbar-brand {

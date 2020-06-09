@@ -1,5 +1,7 @@
 .AddRoot{
     text-align: right;
+    display: inline-block;
+    float: right;
 }
 
 .NoDisplay{
@@ -29,7 +31,7 @@
     height: 65px;
     width: 65px;
     color: white;
-    padding-top: 25px;
+    padding-top: 31px;
     font-weight: 100;
     cursor: pointer;
     transition: box-shadow 0.2s, transform 0.4s;

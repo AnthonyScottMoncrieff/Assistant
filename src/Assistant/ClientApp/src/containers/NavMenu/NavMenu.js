@@ -28,8 +28,7 @@ export class NavMenu extends Component {
             this.setState({shouldShowShadow: true});
     }
 
-    toggleNavbar = (event) => {
-        console.log(event.target.parentElement);
+    toggleNavbar = () => {
         let width = window.innerWidth;
 
         this.setState({
@@ -45,7 +44,7 @@ export class NavMenu extends Component {
             <header className={classes.Header}>
                 <Navbar className={`navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 ${classes.Nav} ${classes.FixedNav} ${shadow}`} light>
                     <Container>
-                        <NavbarBrand className={classes.Brand} tag={Link} to="/">Assistant</NavbarBrand>
+                        <NavbarBrand className={classes.Brand} tag={Link} to="/">A</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                             <ul className="navbar-nav flex-grow">

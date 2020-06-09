@@ -29,7 +29,7 @@ export default class App extends Component {
     render() {
         return (
             <Layout>
-                <Route exact path='/' component={Home} />
+                <AuthorizeRoute exact path='/' component={Home} />
                 <AuthorizeRoute exact path='/tv-shows' component={TvShowRangeManager} />
                 <AuthorizeRoute exact path='/tv-shows/:showKey' component={FullTvShowManager} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

@@ -13,6 +13,23 @@
     margin-left: 2%;
     position: relative;
     z-index: 98;
+    max-height: 545px;
+    overflow: hidden;
+}
+
+.ShowCollection{
+    clear: both;
+}
+
+.Active{
+    background-color: rgba(211, 218, 230, 0.5);
+}
+
+.Title{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    font-size: 33px;
 }
 
 .TvShow:hover {
@@ -46,7 +63,7 @@
     width: 37px;
     text-align: center;
     height: 35px;
-    padding-top: 1px;
+    padding-top: 2px;
     font-size: 21px;
     cursor: pointer;
     display: none;

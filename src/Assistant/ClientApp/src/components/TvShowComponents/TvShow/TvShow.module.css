@@ -31,3 +31,9 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+@media (max-width: 767px) {
+    .TvShow{
+        min-height: 0;
+    }
+}
