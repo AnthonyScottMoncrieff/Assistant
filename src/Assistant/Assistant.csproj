@@ -36,6 +36,10 @@
     <ProjectReference Include="..\Assistant.Models\Assistant.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Identity\css\site.css" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
