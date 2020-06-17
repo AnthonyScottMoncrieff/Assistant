@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import classes from './Spinner.module.css';
 
 const spinner = (props) => (
-    <div className={classes.Loader}>props.children</div>
+    <Fragment>
+        <div className={classes.Loader}></div>
+        <div className={classes.Message}>{props.children}</div>
+    </Fragment>
 );
 
 export default spinner;
