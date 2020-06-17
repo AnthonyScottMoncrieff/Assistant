@@ -6,6 +6,7 @@ import EpisodeGrouping from '../EpisodeGrouping/EpisodeGrouping';
 import * as actions from '../../../store/actions'
 import { connect } from 'react-redux';
 import UpcomingEpisode from '../../../components/TvShowComponents/UpcomingEpisode/UpcomingEpisode';
+import Error from '../../../components/UI/Error/Error';
 
 class EpisodeManager extends Component {
     componentDidMount() {
@@ -34,7 +35,7 @@ class EpisodeManager extends Component {
             upcomingEpisode = <UpcomingEpisode episodes={show.episodes} />
         }
         else if (this.props.error) {
-            episodeCollection = <div>ERROR</div>
+            episodeCollection = <div><Error>Unable to fetch episodes</Error></div>
         }
         return (
             <Fragment>

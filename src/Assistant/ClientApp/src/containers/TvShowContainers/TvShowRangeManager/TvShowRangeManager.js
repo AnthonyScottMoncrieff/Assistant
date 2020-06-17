@@ -10,6 +10,7 @@ import Modal from '../../../components/UI/Modal/Modal';
 import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
 import { Container } from 'reactstrap';
+import Error from '../../../components/UI/Error/Error';
 
 class TvShowRangeManager extends Component {
     state = {
@@ -57,7 +58,7 @@ class TvShowRangeManager extends Component {
             );
         }
         else if (this.props.fetchError)
-            shows = (<div>ERROR</div>);
+            shows = (<div><Error>Unable to fetch Shows</Error></div>);
 
         return shows;
     }
