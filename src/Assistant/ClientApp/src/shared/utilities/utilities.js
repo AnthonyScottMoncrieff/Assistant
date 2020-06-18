@@ -34,11 +34,15 @@ export const groupByShallowProperty = (collection, property) => {
 
 export const toBritishDate = (dateInput) => {
     let date = new Date(dateInput);
+    if(date.toString() === 'Invalid Date')
+        return 'No available date';
     return `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
 }
 
 export const isDateInFuture = (dateInput) => {
     let parsedDate = new Date(dateInput);
+    if(parsedDate.toString() === 'Invalid Date')
+        return false;
     let currentDateTime = new Date();
     let currentDateOnly = new Date(`${currentDateTime.getUTCFullYear()}-${currentDateTime.getMonth() + 1}-${currentDateTime.getDate()}`);
     return currentDateOnly <= parsedDate;

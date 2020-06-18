@@ -1,10 +1,33 @@
-const localStorageMock = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    removeItem: jest.fn(),
-    clear: jest.fn(),
-};
-global.localStorage = localStorageMock;
+import Enzyme from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
+
+class LocalStorageMock {
+    constructor() {
+      this.store = {};
+    }
+  
+    clear() {
+      this.store = {};
+    }
+  
+    getItem(key) {
+      return this.store[key] || null;
+    }
+  
+    setItem(key, value) {
+      this.store[key] = value.toString();
+    }
+  
+    removeItem(key) {
+      delete this.store[key];
+    }
+  }
+global.localStorage = new LocalStorageMock();
+
+Enzyme.configure({
+    adapter: new EnzymeAdapter(),
+    disableLifecycleMethods: true
+});
 
 // Mock the request issued by the react app to get the client configuration parameters.
 window.fetch = () => {

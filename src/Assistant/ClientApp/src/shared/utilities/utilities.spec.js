@@ -104,6 +104,17 @@ describe('To British Date tests', () => {
         //Assert
         expect(britishDate).toBe('01/10/2020');
     })
+
+    it('toBritishDate should return message if date is invalid', () => {
+        //Arrange
+        let badDate = 'bad';
+
+        //Act
+        let response = toBritishDate(badDate);
+
+        //ASsert
+        expect(response).toBe('No available date');
+    })
 })
 
 describe('Is Date in Future tests', () => {
@@ -139,5 +150,16 @@ describe('Is Date in Future tests', () => {
 
         //ASsert
         expect(response).toBe(true);
+    })
+
+    it('isDateInFuture should return false if date is invalid', () => {
+        //Arrange
+        let badDate = 'bad';
+
+        //Act
+        let response = isDateInFuture(badDate);
+
+        //ASsert
+        expect(response).toBe(false);
     })
 })

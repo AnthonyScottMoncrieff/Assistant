@@ -4,8 +4,8 @@ import Hero from '../../Assets/Images/hero.jpg';
 
 const home = () => (
     <Fragment>
-        <div className={classes.Root} style={{backgroundImage: `url(${Hero})`}} />
-        <div className={classes.Title}>Welcome, from your own personal life assistant. We got this.</div>
+        <div data-test='Root' className={classes.Root} style={{backgroundImage: `url(${Hero})`}} />
+        <div data-test='Title' className={classes.Title}>Welcome, from your own personal life assistant. We got this.</div>
     </Fragment>
 );
 
