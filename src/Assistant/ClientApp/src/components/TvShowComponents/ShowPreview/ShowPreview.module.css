@@ -3,12 +3,15 @@
     text-align: center;
 }
 
-    .ShowPreview img {
-        display: inline-block;
-        vertical-align: middle;
-        max-width: 20%;
-        height: 200px;
-    }
+.Image {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 20%;
+    height: 200px;
+    width:142px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 .ShowDetail {
     display: inline-block;

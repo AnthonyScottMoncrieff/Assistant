@@ -8,10 +8,10 @@ const showPreview = (props) => {
 
     return (
         <div data-test='ShowPreview' className={classes.ShowPreview}>
-            <img src={props.showImg} alt='show preview'/>
-            <div className={classes.ShowDetail}>
-                <div className={classes.ShowName}>{props.showName}</div>
-                <div className={classes.ShowDescription}>{cutSummary}</div>
+            <div data-test='Image' className={classes.Image} style={{ backgroundImage: `url(${props.showImg})` }}/>
+            <div data-test='ShowDetail' className={classes.ShowDetail}>
+                <div data-test='ShowName' className={classes.ShowName}>{props.showName}</div>
+                <div data-test='ShowDescription' className={classes.ShowDescription}>{cutSummary}</div>
             </div>
         </div>
     )
