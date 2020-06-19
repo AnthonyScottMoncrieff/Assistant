@@ -7,7 +7,7 @@ const showPreview = (props) => {
     let cutSummary = strippedSummary.length > 243 ? `${strippedSummary.substring(0, 243)}...` : strippedSummary;
 
     return (
-        <div className={classes.ShowPreview}>
+        <div data-test='ShowPreview' className={classes.ShowPreview}>
             <img src={props.showImg} alt='show preview'/>
             <div className={classes.ShowDetail}>
                 <div className={classes.ShowName}>{props.showName}</div>
