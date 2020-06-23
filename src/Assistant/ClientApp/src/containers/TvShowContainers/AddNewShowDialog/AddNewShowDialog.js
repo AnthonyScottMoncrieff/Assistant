@@ -34,12 +34,12 @@ class AddNewShowDialog extends Component {
     }
 
     submitClickHandler = () => {
-        if (this.props.shows.filter(x => x.showKey === this.state.tvShowRequest.searchTerm).length === 0){
+        if (this.props.shows.filter(x => x.showKey === this.state.tvShowRequest.searchTerm).length === 0) {
             let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { error: false, errorMessage: "" });
             this.setState({ tvShowRequest: updatedTvshowRequest });
             this.props.onSubmitTvShow(this.state.tvShowRequest.selectedShow, this.state.tvShowRequest.searchTerm, () => this.cancelSubmissionHandler());
         }
-        else{
+        else {
             let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { error: true, errorMessage: "ERROR: You attempted to add a duplicate show" });
             this.setState({ tvShowRequest: updatedTvshowRequest });
         }
@@ -86,22 +86,21 @@ class AddNewShowDialog extends Component {
 
     render() {
         let showRequest = this.state.tvShowRequest;
-        let selectedShowDisplay = showRequest.error
+        let selectedShowDisplay = showRequest.error || (showRequest.selectedShow === null && !showRequest.fetchingShow)
             ? null
-            : showRequest.selectedShow === null && !showRequest.fetchingShow
-                ? null
-                : showRequest.selectedShow === null && showRequest.fetchingShow
-                    ? <Spinner>Loading...</Spinner>
-                    : <ShowPreview
-                        showImg={toHttps(showRequest.selectedShow.image.medium)}
-                        showName={showRequest.selectedShow.name}
-                        showSummary={showRequest.selectedShow.summary} />;
-        let submit = showRequest.selectedShow !== null && !showRequest.error
-            ? <Fragment>
-                <Button btnType="Success" clicked={this.submitClickHandler} disabled={this.props.loading}>Submit</Button>
-                <Button btnType="Danger" clicked={this.cancelSubmissionHandler}>Cancel</Button>
-            </Fragment>
-            : null;
+            : showRequest.selectedShow === null && showRequest.fetchingShow
+                ? <Spinner>Loading...</Spinner>
+                : 
+                <Fragment>
+                    <ShowPreview
+                    showImg={toHttps(showRequest.selectedShow.image.medium)}
+                    showName={showRequest.selectedShow.name}
+                    showSummary={showRequest.selectedShow.summary} />
+                    <div className={classes.SubmitRegion}>
+                        <Button btnType="Success" clicked={this.submitClickHandler} disabled={this.props.loading}>Submit</Button>
+                        <Button btnType="Danger" clicked={this.cancelSubmissionHandler}>Cancel</Button>
+                    </div>
+                </Fragment>;
 
         return (
             <div className={classes.AddNewShowDialog}>
@@ -121,9 +120,6 @@ class AddNewShowDialog extends Component {
                     </div>
                 </div>
                 {selectedShowDisplay}
-                <div className={classes.SubmitRegion}>
-                    {submit}
-                </div>
                 <Error isVisible={this.state.tvShowRequest.error}>{this.state.tvShowRequest.errorMessage}</Error>
             </div>
         )
