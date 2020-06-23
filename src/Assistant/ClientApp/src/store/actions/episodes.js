@@ -1,7 +1,4 @@
-import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import { stripHTMLTags } from '../../shared/utilities/utilities'
-import { saveEpisodesToLocalstorage, getEpisodesFromLocalstorage } from '../../shared/utilities/episodeHelpers';
 
 /* START Episode Actions */
 export const fetchEpisodesStarted = () => {
@@ -37,22 +34,9 @@ export const setNotIsLoading = () => {
 }
 
 export const initEpisodes = (showKey) => {
-    return dispatch => {
-        dispatch(fetchEpisodesStarted());
-        let savedEpisodes = getEpisodesFromLocalstorage(showKey);
-        if(savedEpisodes !== null)
-            dispatch(setEpisodes(savedEpisodes, showKey));
-        else
-            axios.get(`https://api.tvmaze.com/singlesearch/shows?q=${showKey}&embed=episodes`)
-                .then((response) => {
-                    let episodes = response.data._embedded.episodes.map(x => { return { ...x, summary: stripHTMLTags(x.summary) } });
-                    saveEpisodesToLocalstorage(episodes, showKey);
-                    dispatch(setEpisodes(episodes, showKey));
-                })
-                .catch(error => {
-                    console.log(error);
-                    dispatch(fetchEpisodesFailed());
-                })
+    return {
+        type: actionTypes.INIT_EPISODES_SAGA,
+        showKey
     }
 }
 /* END Episode Actions */

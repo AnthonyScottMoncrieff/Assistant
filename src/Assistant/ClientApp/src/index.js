@@ -5,11 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from "redux-saga";
 //import registerServiceWorker from './registerServiceWorker';
 
 import tvShows from './store/reducers/tvShows';
 import episodes from './store/reducers/episodes';
+import {watchEpisodes, watchTvShows} from './store/sagas/index'
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -21,9 +22,14 @@ const rootReducer = combineReducers({
     episodes: episodes
 });
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(sagaMiddleware)
 ));
+
+sagaMiddleware.run(watchEpisodes);
+sagaMiddleware.run(watchTvShows);
 
 ReactDOM.render(
     <Provider store={store}>

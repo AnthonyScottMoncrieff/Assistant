@@ -1,2 +1,2 @@
-export { initTvShows, initTvShowSubmission, initTvShowDeletion } from './tvShows';
-export { initEpisodes, setIsLoading, setNotIsLoading } from './episodes'
+export { initTvShows, initTvShowSubmission, initTvShowDeletion, fetchTvShowsStarted, fetchTvShowsFailed, setTvShows, submitTvShowStarted, submitTvShowFailed, submitTvShow, deleteTvShow, deleteTvShowFailed, deleteTvShowStarted } from './tvShows';
+export { initEpisodes, setIsLoading, setNotIsLoading, setEpisodes, fetchEpisodesStarted, fetchEpisodesFailed } from './episodes'

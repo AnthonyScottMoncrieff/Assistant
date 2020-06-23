@@ -1,26 +1,4 @@
-import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import authService from '../../containers/api-authorization/AuthorizeService';
-import { stripHTMLTags, toHttps } from '../../shared/utilities/utilities';
-
-const configureAuthHeader = (token) => {
-    return {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    }
-}
-
-const configurePost = (show, key) => {
-    let imgUrl = show.image && show.image.medium ? show.image.medium : "";
-
-    return {
-        showName: show.name,
-        showKey: key,
-        thumbnailUrl: toHttps(imgUrl),
-        summary: show.summary
-    }
-}
 
 /* START TvShow Fetch Actions */
 export const setTvShows = (shows) => {
@@ -43,21 +21,10 @@ export const fetchTvShowsFailed = () => {
 };
 
 export const initTvShows = () => {
-    return dispatch => {
-        dispatch(fetchTvShowsStarted());
-        authService.getAccessToken()
-            .then(token => {
-                var header = configureAuthHeader(token);
-                axios.get('/api/tvshows', header)
-                    .then(response => {
-                        dispatch(setTvShows(response.data.result))
-                    })
-                    .catch(_ => {
-                        dispatch(fetchTvShowsFailed())
-                    })
-            })
-    }
-}
+    return {
+        type: actionTypes.SET_TVSHOWS_SAGA
+    };
+};
 /* END TvShow Actions */
 
 /* START TvShow Submit Actions */
@@ -82,22 +49,11 @@ export const submitTvShowFailed = () => {
 };
 
 export const initTvShowSubmission = (show, key, closeDialog) => {
-    show.summary = stripHTMLTags(show.summary);
-    return dispatch => {
-        dispatch(submitTvShowStarted());
-        authService.getAccessToken()
-            .then(token => {
-                let postData = configurePost(show, key);
-                let header = configureAuthHeader(token);
-                axios.post('/api/tvshows', postData, header)
-                    .then(response => {
-                        dispatch(submitTvShow(response.data.result.tvShow));
-                        closeDialog();
-                    })
-                    .catch(_ => {
-                        dispatch(submitTvShowFailed())
-                    })
-            })
+    return {
+        type: actionTypes.SUBMIT_TVSHOW_SAGA,
+        show,
+        key,
+        closeDialog
     }
 }
 /* END TvShow Submit Actions */
@@ -124,20 +80,10 @@ export const deleteTvShowFailed = () => {
 };
 
 export const initTvShowDeletion = (key, closeDialog) => {
-    return dispatch => {
-        dispatch(deleteTvShowStarted());
-        authService.getAccessToken()
-            .then(token => {
-                let header = configureAuthHeader(token);
-                axios.delete(`/api/tvshows?showKey=${key}`, header)
-                    .then(_ => {
-                        dispatch(deleteTvShow(key));
-                        closeDialog();
-                    })
-                    .catch(_ => {
-                        dispatch(deleteTvShowFailed())
-                    })
-            })
-    }
-}
+    return {
+        type: actionTypes.DELETE_TVSHOW_SAGA,
+        key,
+        closeDialog
+    };
+};
 /* END TvShow delete Actions */
