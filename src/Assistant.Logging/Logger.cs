@@ -18,7 +18,7 @@ namespace Assistant.Logging
         {
             _exceptionlessClient = exceptionlessClient;
             _messageDetails = new ConcurrentQueue<string>();
-            SetMessageTitle("Matching OrderContracts: Did not successfull match any OrderContracts");
+            SetMessageTitle("TvShow Action: Performing TvShow Action");
         }
 
         public void SubmitException(Exception exception)
