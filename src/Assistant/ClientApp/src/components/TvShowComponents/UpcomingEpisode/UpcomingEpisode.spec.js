@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import UpcomingEpisode from './UpcomingEpisode';
 
 describe('Upcoming Episode test', () => {
@@ -39,6 +39,9 @@ describe('Upcoming Episode test', () => {
 
         let episodeNode = findByTestAtrr(component, 'Episode');
         expect(episodeNode.length).toBe(1);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('upcomingEpisode should render correctly if past date', () => {
@@ -64,5 +67,8 @@ describe('Upcoming Episode test', () => {
 
         let episodeNode = findByTestAtrr(component, 'Episode');
         expect(episodeNode.length).toBe(0);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

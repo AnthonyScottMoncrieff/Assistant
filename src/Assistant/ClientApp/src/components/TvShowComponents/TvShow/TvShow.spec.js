@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import TvShow from './TvShow';
 
 describe('Tv Show tests', () => {
@@ -35,6 +35,9 @@ describe('Tv Show tests', () => {
         let showDescriptionNode = findByTestAtrr(component, 'ShowDescription');
         expect(showDescriptionNode.length).toBe(1);
         expect(showDescriptionNode.text()).toBe(description);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('tvShow should render correctly on long name and dscription', () => {
@@ -60,5 +63,8 @@ describe('Tv Show tests', () => {
         let showDescriptionNode = findByTestAtrr(component, 'ShowDescription');
         expect(showDescriptionNode.length).toBe(1);
         expect(showDescriptionNode.text()).toBe(`${description.substring(0, 200)}...`);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

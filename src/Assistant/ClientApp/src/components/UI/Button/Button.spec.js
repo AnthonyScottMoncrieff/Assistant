@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import classes from './Button.module.css';
 import Button from './Button';
 
@@ -23,6 +23,9 @@ describe('Button tests', () => {
         expect(buttonElement.html().includes('disabled=""')).toBeFalsy();
         expect(buttonElement.hasClass(classes.Button)).toBeTruthy();
         expect(buttonElement.hasClass(classes[props.btnType])).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('button should render correctly if disabled', () => {
@@ -37,5 +40,8 @@ describe('Button tests', () => {
         expect(buttonElement.html().includes('disabled=""')).toBeTruthy();
         expect(buttonElement.hasClass(classes.Button)).toBeTruthy();
         expect(buttonElement.hasClass(classes[props.btnType])).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

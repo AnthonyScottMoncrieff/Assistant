@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import Add from './Add';
 
 describe('Add tests', () => {
@@ -25,6 +25,9 @@ describe('Add tests', () => {
 
         let labelElement = findByTestAtrr(component, 'Label');
         expect(labelElement.length).toBe(1);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('add should render correctly when not visible', () => {
@@ -42,5 +45,8 @@ describe('Add tests', () => {
 
         let labelElement = findByTestAtrr(component, 'Label');
         expect(labelElement.length).toBe(0);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

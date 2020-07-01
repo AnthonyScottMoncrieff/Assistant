@@ -65,8 +65,7 @@ input.propTypes = {
     touched: PropTypes.bool,
     elementType: PropTypes.string,
     value: PropTypes.string,
-    changed: PropTypes.func,
-    elementConfig: PropTypes.node.isRequired
+    changed: PropTypes.func
 }
 
 export default input;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import ShowPreview from './ShowPreview';
 
 describe('Show Preview tests', () => {
@@ -37,6 +37,9 @@ describe('Show Preview tests', () => {
         let showDescriptionNode = findByTestAtrr(component, 'ShowDescription');
         expect(showDescriptionNode.length).toBe(1);
         expect(showDescriptionNode.text()).toBe(showSummary);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('showPreview should render correctly with long summary', () => {
@@ -64,5 +67,8 @@ describe('Show Preview tests', () => {
         let showDescriptionNode = findByTestAtrr(component, 'ShowDescription');
         expect(showDescriptionNode.length).toBe(1);
         expect(showDescriptionNode.text()).toBe(`${showSummary.substring(0, 243)}...`);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

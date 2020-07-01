@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import Backdrop from './Backdrop';
 
 describe('Backdrop tests', () => {
@@ -10,6 +10,9 @@ describe('Backdrop tests', () => {
 
         let backdropComponent = findByTestAtrr(component, 'Backdrop');
         expect(backdropComponent.length).toBe(1);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('backdrop should render correctly when not visible', () => {
@@ -18,5 +21,8 @@ describe('Backdrop tests', () => {
 
         let backdropComponent = findByTestAtrr(component, 'Backdrop');
         expect(backdropComponent.length).toBe(0);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

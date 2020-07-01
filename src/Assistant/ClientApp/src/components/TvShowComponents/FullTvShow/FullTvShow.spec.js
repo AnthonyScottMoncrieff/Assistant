@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import FullTvShow from './FullTvShow';
 
 describe('Full Tv Show tests', () => {
@@ -37,5 +37,8 @@ describe('Full Tv Show tests', () => {
         let description = findByTestAtrr(component, 'Description');
         expect(description.length).toBe(1);
         expect(description.text()).toBe(descriptionText);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import ShowDeleteDialog from './ShowDeleteDialog';
 
 describe('Show Delete Dialog tests', () => {
@@ -42,6 +42,9 @@ describe('Show Delete Dialog tests', () => {
 
         let errorNode = findByTestAtrr(component, 'ErrorRoot');
         expect(errorNode.length).toBe(0);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('showDeleteDialog should render correctly on error', () => {
@@ -68,5 +71,8 @@ describe('Show Delete Dialog tests', () => {
 
         let errorNode = findByTestAtrr(component, 'ErrorRoot');
         expect(errorNode.length).toBe(1);
+        
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

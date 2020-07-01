@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import Spinner from './Spinner';
 
 describe('Spinner tests', () => {
@@ -15,5 +15,8 @@ describe('Spinner tests', () => {
         let messageElement = findByTestAtrr(component, 'Message');
         expect(messageElement.length).toBe(1);
         expect(messageElement.text()).toBe(children);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

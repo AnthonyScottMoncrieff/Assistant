@@ -2,7 +2,7 @@ import Episode from './Episode';
 import classes from './Episode.module.css';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import NoImage from '../../../Assets/Images/noimg.png';
 
 const getProps = (shouldLoadImg, image, name, number, airdate) => {
@@ -51,6 +51,9 @@ describe('Episode tests', () => {
 
         let dateContainer = findByTestAtrr(episode, 'Date');
         expect(dateContainer.length).toBe(1);
+
+        const propsErr = checkProps(episode, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('episode should render correctly with no image and past airdate', () => {
@@ -79,6 +82,9 @@ describe('Episode tests', () => {
 
         let dateContainer = findByTestAtrr(episode, 'Date');
         expect(dateContainer.length).toBe(1);
+
+        const propsErr = checkProps(episode, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('episode should render correctly with no image and future airdate', () => {
@@ -107,5 +113,8 @@ describe('Episode tests', () => {
 
         let dateContainer = findByTestAtrr(episode, 'Date');
         expect(dateContainer.length).toBe(1);
+
+        const propsErr = checkProps(episode, props);
+        expect(propsErr).toBeUndefined();
     })
 })

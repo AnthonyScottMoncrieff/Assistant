@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import Error from './Error';
 
 describe('Error tests', () => {
@@ -18,6 +18,9 @@ describe('Error tests', () => {
         let errorMessageElement = findByTestAtrr(component, 'ErrorMessage');
         expect(errorMessageElement.length).toBe(1);
         expect(errorMessageElement.text()).toBe(children);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('error should render correctly when NOT visible', () => {
@@ -33,5 +36,8 @@ describe('Error tests', () => {
 
         let errorMessageElement = findByTestAtrr(component, 'ErrorMessage');
         expect(errorMessageElement.length).toBe(0);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })

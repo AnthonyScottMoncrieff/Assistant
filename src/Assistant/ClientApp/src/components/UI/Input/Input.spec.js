@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAtrr } from '../../../TestAssets/utilities';
+import { findByTestAtrr, checkProps } from '../../../TestAssets/utilities';
 import Input from './Input';
 import classes from './Input.module.css';
 
@@ -41,6 +41,9 @@ describe('Input tests', () => {
         expect(inputElement.length).toBe(1);
         expect(inputElement.hasClass(classes.Invalid)).toBeFalsy();
         expect(inputElement.hasClass(classes.InputElement)).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('standard input to render correctly with error', () => {
@@ -59,6 +62,9 @@ describe('Input tests', () => {
         expect(inputElement.length).toBe(1);
         expect(inputElement.hasClass(classes.Invalid)).toBeTruthy();
         expect(inputElement.hasClass(classes.InputElement)).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('incorrect inputtype should render standard input', () => {
@@ -77,6 +83,9 @@ describe('Input tests', () => {
         expect(inputElement.length).toBe(1);
         expect(inputElement.hasClass(classes.Invalid)).toBeFalsy();
         expect(inputElement.hasClass(classes.InputElement)).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('textarea to render correctly with no error', () => {
@@ -95,6 +104,9 @@ describe('Input tests', () => {
         expect(inputElement.length).toBe(1);
         expect(inputElement.hasClass(classes.Invalid)).toBeFalsy();
         expect(inputElement.hasClass(classes.InputElement)).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('textarea to render correctly with error', () => {
@@ -113,6 +125,9 @@ describe('Input tests', () => {
         expect(inputElement.length).toBe(1);
         expect(inputElement.hasClass(classes.Invalid)).toBeTruthy();
         expect(inputElement.hasClass(classes.InputElement)).toBeTruthy();
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('select to render correctly with no error', () => {
@@ -134,6 +149,9 @@ describe('Input tests', () => {
 
         let optionElements = findByTestAtrr(component, 'Option');
         expect(optionElements.length).toBe(3);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 
     it('select to render correctly with error', () => {
@@ -155,5 +173,8 @@ describe('Input tests', () => {
 
         let optionElements = findByTestAtrr(component, 'Option');
         expect(optionElements.length).toBe(3);
+
+        const propsErr = checkProps(component, props);
+        expect(propsErr).toBeUndefined();
     })
 })
