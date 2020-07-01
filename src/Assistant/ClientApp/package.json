@@ -95,6 +95,7 @@
     "start": "rimraf ./build && node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "cross-env CI=true node scripts/test.js --env=jsdom --watchAll=true",
+    "testOnce": "cross-env CI=true node scripts/test.js --env=jsdom",
     "lint": "eslint ./src/"
   },
   "browserslist": {
