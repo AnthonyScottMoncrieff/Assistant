@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Episode.module.css';
 import { toBritishDate, isDateInFuture, toHttps } from '../../../shared/utilities/utilities';
 import NoImage from '../../../Assets/Images/noimg.png';
+import PropTypes from'prop-types';
 
 const episode = (props) => {
     let imgSrc = props.shouldLoadImg && props.episode.image ? toHttps(props.episode.image.medium) : NoImage;
@@ -15,6 +16,18 @@ const episode = (props) => {
             <div data-test='Number' className={classes.Number}>{props.episode.number}</div>
             <div data-test='Date' className={classes.Date}>{toBritishDate(props.episode.airdate)}</div>
         </div>)
+}
+
+episode.propTypes = {
+    shouldLoadImg: PropTypes.bool,
+    episode: PropTypes.shape({
+        airdate: PropTypes.string,
+        name: PropTypes.string,
+        number: PropTypes.number,
+        image: PropTypes.shape({
+            medium: PropTypes.string
+        })
+    })
 }
 
 export default episode;

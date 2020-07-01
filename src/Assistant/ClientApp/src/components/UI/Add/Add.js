@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Add.module.css';
+import PropTypes from'prop-types';
 
 const add = (props) => {
 
@@ -12,5 +13,10 @@ const add = (props) => {
 
     return content;
 };
+
+add.propTypes = {
+    visible: PropTypes.bool,
+    clicked: PropTypes.func
+}
 
 export default add;

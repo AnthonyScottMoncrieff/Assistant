@@ -3,6 +3,7 @@ import classes from './ShowDeleteDialog.module.css';
 import Button from '../../UI/Button/Button';
 import ShowPreview from '../ShowPreview/ShowPreview';
 import Error from '../../UI/Error/Error';
+import PropTypes from'prop-types';
 
 const showDeleteDialog = (props) => {
     return (
@@ -14,6 +15,18 @@ const showDeleteDialog = (props) => {
             </div>
             <Error isVisible={props.error}>ERROR: Could not delete, please try again later</Error>
         </div>)
+}
+
+showDeleteDialog.propTypes = {
+    disabled: PropTypes.bool,
+    submitClickHandler: PropTypes.func,
+    cancelSubmissionHandler: PropTypes.func,
+    error: PropTypes.bool,
+    show: PropTypes.shape({
+        thumbnailUrl: PropTypes.string,
+        showName: PropTypes.string,
+        summary: PropTypes.string
+    })
 }
 
 export default showDeleteDialog;

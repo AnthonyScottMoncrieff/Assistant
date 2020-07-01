@@ -2,6 +2,7 @@ import React, { memo, Fragment } from 'react';
 import './Modal.css';
 import Backdrop from '../Backdrop/Backdrop';
 import Transition from "react-transition-group/Transition";
+import PropTypes from'prop-types';
 
 const modal = (props) => {
 
@@ -29,6 +30,12 @@ const modal = (props) => {
             }}
         </Transition>
     )
+}
+
+modal.propTypes = {
+    show: PropTypes.bool,
+    modalClosed: PropTypes.func,
+    children: PropTypes.node.isRequired
 }
 
 export default memo(modal, (prevProps, nextProps) => nextProps.show === prevProps.show && nextProps.children === prevProps.children);

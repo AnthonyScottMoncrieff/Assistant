@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './ShowPreview.module.css';
 import { stripHTMLTags } from '../../../shared/utilities/utilities';
+import PropTypes from'prop-types';
 
 const showPreview = (props) => {
     let strippedSummary = stripHTMLTags(props.showSummary);
@@ -16,5 +17,11 @@ const showPreview = (props) => {
         </div>
     )
 };
+
+showPreview.propTypes = {
+    showSummary: PropTypes.string,
+    showImg: PropTypes.string,
+    showName: PropTypes.string
+}
 
 export default showPreview;

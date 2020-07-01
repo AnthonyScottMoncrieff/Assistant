@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import classes from './EpisodeGrouping.module.css';
 import Episode from '../../../components/TvShowComponents/Episode/Episode';
 import EpisodeGroupingHeader from '../../../components/TvShowComponents/EpisodeGroupingHeader/EpisodeGroupingHeader';
+import PropTypes from 'prop-types';
 
 class EpisodeGrouping extends Component {
     state = {
@@ -32,5 +33,15 @@ class EpisodeGrouping extends Component {
         )
     }
 };
+
+EpisodeGrouping.propTypes = {
+    grouping: PropTypes.shape({
+        key: PropTypes.number,
+        groupedCollection: PropTypes.arrayOf(PropTypes.shape({
+            number: PropTypes.number,
+            id: PropTypes.number
+        }))
+    })
+}
 
 export default EpisodeGrouping;

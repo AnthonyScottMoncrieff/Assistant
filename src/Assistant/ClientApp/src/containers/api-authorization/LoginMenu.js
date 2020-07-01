@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
-import { Link, NavLink as RRNavLink } from 'react-router-dom';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import classes from './Styles/LoginMenu.module.css';

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from'prop-types';
 import classes from './Input.module.css';
 
 const input = (props) => {
@@ -58,5 +58,15 @@ const input = (props) => {
         </div>
     );
 };
+
+input.propTypes = {
+    invalid: PropTypes.bool,
+    shouldValidate: PropTypes.bool,
+    touched: PropTypes.bool,
+    elementType: PropTypes.string,
+    value: PropTypes.string,
+    changed: PropTypes.func,
+    elementConfig: PropTypes.node.isRequired
+}
 
 export default input;

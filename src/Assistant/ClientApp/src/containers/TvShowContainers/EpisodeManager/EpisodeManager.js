@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions'
 import { connect } from 'react-redux';
 import UpcomingEpisode from '../../../components/TvShowComponents/UpcomingEpisode/UpcomingEpisode';
 import Error from '../../../components/UI/Error/Error';
+import PropTypes from 'prop-types';
 
 class EpisodeManager extends Component {
     componentDidMount() {
@@ -44,6 +45,17 @@ class EpisodeManager extends Component {
                 {episodeCollection}
             </Fragment>);
     }
+}
+
+EpisodeManager.propTypes = {
+    showKey: PropTypes.string,
+    onFetchEpisodes: PropTypes.func,
+    error: PropTypes.bool,
+    episodesLoading: PropTypes.bool,
+    onSetIsLoading: PropTypes.func,
+    showEpisodes: PropTypes.arrayOf(PropTypes.shape({
+        showKey: PropTypes.string
+    }))
 }
 
 const mapStateToProps = state => {

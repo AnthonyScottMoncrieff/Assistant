@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './FullTvShow.module.css';
+import PropTypes from'prop-types';
 
 const fullTvShow = (props) => (
     <div data-test='FullTvShow' className={classes.FullTvShow}>
@@ -10,5 +11,11 @@ const fullTvShow = (props) => (
         </div>
     </div>
 );
+
+fullTvShow.propTypes = {
+    header: PropTypes.string,
+    thumbnailUrl: PropTypes.string,
+    description: PropTypes.string
+}
 
 export default fullTvShow;

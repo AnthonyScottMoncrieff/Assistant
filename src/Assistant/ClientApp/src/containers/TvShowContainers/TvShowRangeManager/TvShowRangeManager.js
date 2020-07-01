@@ -11,6 +11,7 @@ import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
 import { Container } from 'reactstrap';
 import Error from '../../../components/UI/Error/Error';
+import PropTypes from 'prop-types';
 
 class TvShowRangeManager extends Component {
     state = {
@@ -80,6 +81,21 @@ class TvShowRangeManager extends Component {
             </Container>
         )
     }
+}
+
+TvShowRangeManager.propTypes = {
+    onFetchTvShows: PropTypes.func,
+    onDeleteTvShow: PropTypes.func,
+    deleteLoading: PropTypes.bool,
+    deleteError: PropTypes.bool,
+    fetchError: PropTypes.bool,
+    fetchLoading: PropTypes.bool,
+    shows: PropTypes.arrayOf(PropTypes.shape({
+        showKey: PropTypes.string,
+        thumbnailUrl: PropTypes.string,
+        showName: PropTypes.string,
+        summary: PropTypes.string
+    }))
 }
 
 const mapStateToProps = state => {

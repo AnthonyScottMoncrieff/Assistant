@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Error.module.css';
+import PropTypes from'prop-types';
 
 const error = (props) => {
     let errorContent = props.isVisible ? 
@@ -10,6 +11,11 @@ const error = (props) => {
     null;
 
     return errorContent;
+}
+
+error.propTypes = {
+    isVisible: PropTypes.bool,
+    children: PropTypes.node.isRequired
 }
 
 export default error;

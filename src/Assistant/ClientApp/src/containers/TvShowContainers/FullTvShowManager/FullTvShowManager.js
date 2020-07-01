@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import FullTvShow from '../../../components/TvShowComponents/FullTvShow/FullTvShow';
 import EpisodeManager from '../EpisodeManager/EpisodeManager';
 import { Container } from 'reactstrap';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
@@ -30,6 +30,17 @@ class FullTvShowManager extends Component {
             </Container>
         )
     }
+}
+
+FullTvShowManager.propTypes = {
+    onFetchTvShows: PropTypes.func,
+    tvShowsloading: PropTypes.bool,
+    shows: PropTypes.arrayOf(PropTypes.shape({
+        showKey: PropTypes.string,
+        showName: PropTypes.string,
+        thumbnailUrl: PropTypes.string,
+        summary: PropTypes.string
+    }))
 }
 
 const mapStateToProps = state => {

@@ -63,7 +63,7 @@ export function* DeleteTvShowSaga(action) {
     try {
         let token = yield authService.getAccessToken()
         let header = configureAuthHeader(token);
-        let response = yield axios.delete(`/api/tvshows?showKey=${key}`, header)
+        yield axios.delete(`/api/tvshows?showKey=${key}`, header)
         yield put(actions.deleteTvShow(key));
         closeDialog();
     }

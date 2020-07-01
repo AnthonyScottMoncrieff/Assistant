@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import PropTypes from'prop-types';
 import classes from './Spinner.module.css';
 
 const spinner = (props) => (
@@ -8,5 +8,9 @@ const spinner = (props) => (
         <div data-test='Message' className={classes.Message}>{props.children}</div>
     </Fragment>
 );
+
+spinner.propTypes = {
+    children: PropTypes.node.isRequired
+}
 
 export default spinner;
