@@ -9,6 +9,7 @@ import axios from 'axios';
 import * as actions from '../../../store/actions'
 import { connect } from 'react-redux';
 import Error from '../../../components/UI/Error/Error';
+import PropTypes from 'prop-types';
 
 class AddNewShowDialog extends Component {
     state = {
@@ -61,7 +62,7 @@ class AddNewShowDialog extends Component {
                 let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { selectedShow: response.data, fetchingShow: false, error: false, errorMessage: "" });
                 this.setState({ tvShowRequest: updatedTvshowRequest });
             })
-            .catch(err => {
+            .catch(_ => {
                 let updatedTvshowRequest = updateObject(this.state.tvShowRequest, { fetchingShow: false, error: true, errorMessage: "ERROR: Cannot find show with this name" });
                 this.setState({ tvShowRequest: updatedTvshowRequest });
             })
@@ -124,6 +125,14 @@ class AddNewShowDialog extends Component {
             </div>
         )
     }
+}
+
+AddNewShowDialog.propTypes = {
+    loading: PropTypes.bool,
+    onSubmitTvShow: PropTypes.func,
+    shows: PropTypes.arrayOf(PropTypes.shape({
+        showKey: PropTypes.string
+    }))
 }
 
 const mapStateToProps = state => {
