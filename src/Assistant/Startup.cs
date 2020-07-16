@@ -1,5 +1,7 @@
 using Assistant.DataAccess;
+using Assistant.Filters;
 using Assistant.Models.Entities;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,15 @@ namespace Assistant
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddHttpContextAccessor();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelAttribute));
+            }).AddFluentValidation(config =>
+            {
+                config.ImplicitlyValidateChildProperties = true;
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 

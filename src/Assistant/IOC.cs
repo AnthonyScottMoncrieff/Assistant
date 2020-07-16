@@ -7,7 +7,10 @@ using Assistant.Domain;
 using Assistant.Domain.Interfaces;
 using Assistant.Logging;
 using Assistant.Logging.Interfaces;
+using Assistant.Models.Entities;
+using Assistant.Models.Entities.Validators;
 using Exceptionless;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +25,12 @@ namespace Assistant
             RegisterDbContextItems(services);
             RegisterUtilities(services);
             RegisterDomain(services);
+            RegisterValidators(services);
+        }
+
+        private static void RegisterValidators(IServiceCollection services)
+        {
+            services.AddTransient<IValidator<TvShow>, TvShowValidation>();
         }
 
         private static void RegisterUtilities(IServiceCollection services)
