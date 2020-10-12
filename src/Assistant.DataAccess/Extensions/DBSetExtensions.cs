@@ -11,8 +11,12 @@ namespace Assistant.DataAccess.Extensions
         public static async Task<T> AddIfNotExists<T>(this DbSet<T> dbSet, T entity, Expression<Func<T, bool>> predicate = null) where T : class, new()
         {
             var exists = predicate != null ? dbSet.Any(predicate) : dbSet.Any();
+
             if (!exists)
-                return (await dbSet.AddAsync(entity)).Entity;
+            {
+                var addResponse = await dbSet.AddAsync(entity);
+                return addResponse.Entity;
+            }
             return await dbSet.FirstAsync(predicate);
         }
     }
