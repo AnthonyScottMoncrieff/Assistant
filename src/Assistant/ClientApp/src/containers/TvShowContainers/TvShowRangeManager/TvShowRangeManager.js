@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import TVShow from '../../../components/TvShowComponents/TvShow/TvShow'
-import Spinner from '../../../components/UI/Spinner/Spinner'
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import TVShow from '../../../components/TvShowComponents/TvShow/TvShow';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import * as actions from '../../../store/actions/index';
 import classes from './TvShowRangeManager.module.css';
 import { Link } from 'react-router-dom';
@@ -12,76 +11,84 @@ import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDia
 import { Container } from 'reactstrap';
 import Error from '../../../components/UI/Error/Error';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-class TvShowRangeManager extends Component {
-    state = {
-        shouldShowModal: false
-    }
+const TvShowRangeManager = (props) => {
+    let [dialogContent, setDialogContent] = useState(<AddNewShowDialog />);
+    let [shouldShowModal, setShouldShowModal] = useState(false);
+    const storeShows = useSelector((state) => state.tvShows.shows, shallowEqual);
+    const fetchLoading = useSelector((state) => state.tvShows.tvShowsLoading);
+    const fetchError = useSelector((state) => state.tvShows.tvShowFetchError);
+    const deleteLoading = useSelector((state) => state.tvShows.tvShowDeletionLoading);
+    const deleteError = useSelector((state) => state.tvShows.tvShowDeletionError);
+    const dispatch = useDispatch();
 
-    dialogContent = <AddNewShowDialog />;
+    useEffect(() => {
+        if (storeShows.length > 0) return;
+        else dispatch(actions.initTvShows());
+    }, []);
 
-    componentDidMount() {
-        this.props.onFetchTvShows(this.props.shows, false);
-    }
+    const openAddTvshowModalHandler = () => {
+        setDialogContent((dialogContent = <AddNewShowDialog />));
+        setShouldShowModal((shouldShowModal = true));
+    };
 
-    openAddTvshowModalHandler = () => {
-        this.dialogContent = <AddNewShowDialog />;
-        this.setState({ shouldShowModal: true });
-    }
+    const openDeleteTvshowModalHandler = (show) => {
+        const dialogDeleteContent = (
+            <ShowDeleteDialog
+                show={show}
+                cancelSubmissionHandler={closeModalHandler}
+                submitClickHandler={() => dispatch(actions.initTvShowDeletion(show.showKey, closeModalHandler))}
+                disabled={deleteLoading}
+                error={deleteError}
+            />
+        );
+        setDialogContent((dialogContent = dialogDeleteContent));
+        setShouldShowModal((shouldShowModal = true));
+    };
 
-    openDeleteTvshowModalHandler = (show) => {
-        this.dialogContent = <ShowDeleteDialog
-            show={show}
-            cancelSubmissionHandler={this.closeModalHandler}
-            submitClickHandler={() => this.props.onDeleteTvShow(show.showKey, this.closeModalHandler)}
-            disabled={this.props.deleteLoading}
-            error={this.props.deleteError} />;
-        this.setState({ shouldShowModal: true });
-    }
+    const closeModalHandler = () => {
+        setShouldShowModal((shouldShowModal = false));
+    };
 
-    closeModalHandler = () => {
-        this.setState({ shouldShowModal: false });
-    }
-
-    getShows = () => {
+    const getShows = () => {
         let shows = <Spinner>Loading...</Spinner>;
-        if (!this.props.fetchLoading && !this.props.fetchError) {
-            shows = this.props.shows.map(show =>
+        if (!fetchLoading && !fetchError) {
+            shows = storeShows.map((show) => (
                 <div className={classes.ShowContainer} key={show.showKey}>
                     <Link className={classes.Link} to={`/tv-shows/${show.showKey}`}>
-                        <TVShow
-                            thumbnailUrl={show.thumbnailUrl}
-                            showName={show.showName}
-                            description={show.summary} />
+                        <TVShow thumbnailUrl={show.thumbnailUrl} showName={show.showName} description={show.summary} />
                     </Link>
-                    <div className={classes.Delete} onClick={() => this.openDeleteTvshowModalHandler(show)}>X</div>
+                    <div className={classes.Delete} onClick={() => openDeleteTvshowModalHandler(show)}>
+                        X
+                    </div>
+                </div>
+            ));
+        } else if (fetchError)
+            shows = (
+                <div>
+                    <Error>Unable to fetch Shows</Error>
                 </div>
             );
-        }
-        else if (this.props.fetchError)
-            shows = (<div><Error>Unable to fetch Shows</Error></div>);
 
         return shows;
-    }
-
-    render() {
-        let shows = this.getShows();
-        return (
-            <Container>
-                <div className={classes.TvShowRangeManager}>
-                    <Modal show={this.state.shouldShowModal} modalClosed={this.closeModalHandler}>{this.dialogContent}</Modal>
-                    <div>
-                        <div className={classes.Title}>TV Shows</div>
-                        <Add clicked={this.openAddTvshowModalHandler} visible={!this.props.fetchLoading} />
-                    </div>
-                    <div className={classes.ShowCollection}>
-                        {shows}
-                    </div>
+    };
+    let shows = getShows();
+    return (
+        <Container>
+            <div className={classes.TvShowRangeManager}>
+                <Modal show={shouldShowModal} modalClosed={() => closeModalHandler()}>
+                    {dialogContent}
+                </Modal>
+                <div>
+                    <div className={classes.Title}>TV Shows</div>
+                    <Add clicked={() => openAddTvshowModalHandler()} visible={!fetchLoading} />
                 </div>
-            </Container>
-        )
-    }
-}
+                <div className={classes.ShowCollection}>{shows}</div>
+            </div>
+        </Container>
+    );
+};
 
 TvShowRangeManager.propTypes = {
     onFetchTvShows: PropTypes.func,
@@ -90,29 +97,14 @@ TvShowRangeManager.propTypes = {
     deleteError: PropTypes.bool,
     fetchError: PropTypes.bool,
     fetchLoading: PropTypes.bool,
-    shows: PropTypes.arrayOf(PropTypes.shape({
-        showKey: PropTypes.string,
-        thumbnailUrl: PropTypes.string,
-        showName: PropTypes.string,
-        summary: PropTypes.string
-    }))
-}
-
-const mapStateToProps = state => {
-    return {
-        shows: state.tvShows.shows,
-        fetchLoading: state.tvShows.tvShowsLoading,
-        fetchError: state.tvShows.tvShowFetchError,
-        deleteLoading: state.tvShows.tvShowDeletionLoading,
-        deleteError: state.tvShows.tvShowDeletionError
-    };
+    shows: PropTypes.arrayOf(
+        PropTypes.shape({
+            showKey: PropTypes.string,
+            thumbnailUrl: PropTypes.string,
+            showName: PropTypes.string,
+            summary: PropTypes.string,
+        })
+    ),
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch(actions.initTvShows()),
-        onDeleteTvShow: (showKey, closeModalHandler) => dispatch(actions.initTvShowDeletion(showKey, closeModalHandler))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TvShowRangeManager);
+export default TvShowRangeManager;
