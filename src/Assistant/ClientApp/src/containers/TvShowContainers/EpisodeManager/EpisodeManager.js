@@ -1,76 +1,64 @@
-import React, { Component, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import classes from './EpisodeManager.module.css'
+import classes from './EpisodeManager.module.css';
 import { groupByShallowProperty } from '../../../shared/utilities/utilities';
 import EpisodeGrouping from '../EpisodeGrouping/EpisodeGrouping';
-import * as actions from '../../../store/actions'
-import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
 import UpcomingEpisode from '../../../components/TvShowComponents/UpcomingEpisode/UpcomingEpisode';
 import Error from '../../../components/UI/Error/Error';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
-class EpisodeManager extends Component {
-    componentDidMount() {
-        let show = this.props.showEpisodes.filter(x => x.showKey === this.props.showKey)[0];
-        this.props.onFetchEpisodes(false, this.props.showKey, show);
-    }
+const EpisodeManager = (props) => {
+    const episodesLoading = useSelector((state) => state.episodes.episodesLoading);
+    const error = useSelector((state) => state.episodes.episodesFetchError);
+    const showEpisodes = useSelector((state) => state.episodes.showEpisodes);
+    const dispatch = useDispatch();
 
-    componentWillUnmount() {
-        this.props.onSetIsLoading();
-    }
+    useEffect(() => {
+        let show = showEpisodes.filter((x) => x.showKey === props.showKey)[0];
+        if (show && show.episodes.length > 0) dispatch(actions.setNotIsLoading());
+        else dispatch(actions.initEpisodes(props.showKey));
 
-    render() {
-        let episodeCollection = <Spinner>Loading...</Spinner>;
-        let upcomingEpisode = null;
-        if (!this.props.episodesLoading && !this.props.error) {
-            let show = this.props.showEpisodes.filter(x => x.showKey === this.props.showKey)[0];
-            episodeCollection =
-                <Fragment>
-                    <div className={classes.StyleIndex}><div className={classes.FutureColor}></div><div className={classes.FutureColorText}> - Denotes that the episode either airs today or in the future</div></div>
-                    {groupByShallowProperty(show.episodes, 'season')
-                        .sort((a, b) => b.key - a.key)
-                        .map(x => <EpisodeGrouping
-                            key={x.key}
-                            grouping={x} />)}
-                </Fragment>
-            upcomingEpisode = <UpcomingEpisode episodes={show.episodes} />
-        }
-        else if (this.props.error) {
-            episodeCollection = <div><Error>Unable to fetch episodes</Error></div>
-        }
-        return (
+        return () => dispatch(actions.setIsLoading());
+    });
+
+    let episodeCollection = <Spinner>Loading...</Spinner>;
+    let upcomingEpisode = null;
+    if (!episodesLoading && !error) {
+        let show = showEpisodes.filter((x) => x.showKey === props.showKey)[0];
+        episodeCollection = (
             <Fragment>
-                {upcomingEpisode}
-                <div className={classes.Header}>Episodes</div>
-                {episodeCollection}
-            </Fragment>);
+                <div className={classes.StyleIndex}>
+                    <div className={classes.FutureColor}></div>
+                    <div className={classes.FutureColorText}> - Denotes that the episode either airs today or in the future</div>
+                </div>
+                {groupByShallowProperty(show.episodes, 'season')
+                    .sort((a, b) => b.key - a.key)
+                    .map((x) => (
+                        <EpisodeGrouping key={x.key} grouping={x} />
+                    ))}
+            </Fragment>
+        );
+        upcomingEpisode = <UpcomingEpisode episodes={show.episodes} />;
+    } else if (error) {
+        episodeCollection = (
+            <div>
+                <Error>Unable to fetch episodes</Error>
+            </div>
+        );
     }
-}
+    return (
+        <Fragment>
+            {upcomingEpisode}
+            <div className={classes.Header}>Episodes</div>
+            {episodeCollection}
+        </Fragment>
+    );
+};
 
 EpisodeManager.propTypes = {
     showKey: PropTypes.string,
-    onFetchEpisodes: PropTypes.func,
-    error: PropTypes.bool,
-    episodesLoading: PropTypes.bool,
-    onSetIsLoading: PropTypes.func,
-    showEpisodes: PropTypes.arrayOf(PropTypes.shape({
-        showKey: PropTypes.string
-    }))
-}
-
-const mapStateToProps = state => {
-    return {
-        episodesLoading: state.episodes.episodesLoading,
-        error: state.episodes.episodesFetchError,
-        showEpisodes: state.episodes.showEpisodes
-    };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchEpisodes: (forceRefresh, showKey, show) => show && (show.episodes.length > 0) && !forceRefresh ? dispatch(actions.setNotIsLoading()) : dispatch(actions.initEpisodes(showKey)),
-        onSetIsLoading: () => dispatch(actions.setIsLoading())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EpisodeManager);
+export default EpisodeManager;

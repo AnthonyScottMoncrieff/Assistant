@@ -3,7 +3,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import FullTvShow from '../../../components/TvShowComponents/FullTvShow/FullTvShow';
 import EpisodeManager from '../EpisodeManager/EpisodeManager';
 import { Container } from 'reactstrap';
-import PropTypes from 'prop-types';
 import * as actions from '../../../store/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -32,19 +31,6 @@ const FullTvShowManager = (props) => {
             {episodes}
         </Container>
     );
-};
-
-FullTvShowManager.propTypes = {
-    onFetchTvShows: PropTypes.func,
-    tvShowsloading: PropTypes.bool,
-    shows: PropTypes.arrayOf(
-        PropTypes.shape({
-            showKey: PropTypes.string,
-            showName: PropTypes.string,
-            thumbnailUrl: PropTypes.string,
-            summary: PropTypes.string,
-        })
-    ),
 };
 
 export default FullTvShowManager;

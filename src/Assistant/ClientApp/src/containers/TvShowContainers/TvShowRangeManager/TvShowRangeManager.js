@@ -10,10 +10,9 @@ import AddNewShowDialog from '../AddNewShowDialog/AddNewShowDialog';
 import ShowDeleteDialog from '../../../components/TvShowComponents/ShowDeleteDialog/ShowDeleteDialog';
 import { Container } from 'reactstrap';
 import Error from '../../../components/UI/Error/Error';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-const TvShowRangeManager = (props) => {
+const TvShowRangeManager = () => {
     let [dialogContent, setDialogContent] = useState(<AddNewShowDialog />);
     let [shouldShowModal, setShouldShowModal] = useState(false);
     const storeShows = useSelector((state) => state.tvShows.shows, shallowEqual);
@@ -88,23 +87,6 @@ const TvShowRangeManager = (props) => {
             </div>
         </Container>
     );
-};
-
-TvShowRangeManager.propTypes = {
-    onFetchTvShows: PropTypes.func,
-    onDeleteTvShow: PropTypes.func,
-    deleteLoading: PropTypes.bool,
-    deleteError: PropTypes.bool,
-    fetchError: PropTypes.bool,
-    fetchLoading: PropTypes.bool,
-    shows: PropTypes.arrayOf(
-        PropTypes.shape({
-            showKey: PropTypes.string,
-            thumbnailUrl: PropTypes.string,
-            showName: PropTypes.string,
-            summary: PropTypes.string,
-        })
-    ),
 };
 
 export default TvShowRangeManager;
