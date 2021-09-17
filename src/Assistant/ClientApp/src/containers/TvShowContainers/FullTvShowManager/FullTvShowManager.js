@@ -23,7 +23,7 @@ const FullTvShowManager = (props) => {
         show = shows
             .filter((show) => show.showKey === encodedKey)
             .map((show) => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary} />);
-        episodes = <EpisodeManager showKey={props.match.params.showKey} />;
+        episodes = <EpisodeManager showKey={encodedKey} />;
     }
 
     return (
