@@ -27,6 +27,7 @@ namespace Assistant.DataAccess.DataHandlers.Commands
                     throw new Exception("Unable to show");
 
                 _logger.AddMessageDetail($"DeleteUserTvShowMapping: Attempting to delete show mapping with Show Key: {showKey} and userid: {userId}");
+                showKey = showKey.Replace(" ", "%20");
                 await _commandActionHandlers.DeleteUserTvShowMappingAsync(userId, showKey);
                 _logger.AddMessageDetail($"DeleteUserTvShowMapping: Successfully deleted show with key: {showKey} and userid: {userId}");
                 return GenerateResponse();

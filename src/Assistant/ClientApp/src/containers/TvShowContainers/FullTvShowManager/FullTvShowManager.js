@@ -1,59 +1,50 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import FullTvShow from '../../../components/TvShowComponents/FullTvShow/FullTvShow';
 import EpisodeManager from '../EpisodeManager/EpisodeManager';
 import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
+import { useDispatch, useSelector } from 'react-redux';
 
-class FullTvShowManager extends Component {
-    componentDidMount() {
-        this.props.onFetchTvShows(this.props.shows, false);
+const FullTvShowManager = (props) => {
+    const shows = useSelector((state) => state.tvShows.shows);
+    const tvShowsloading = useSelector((state) => state.tvShows.loading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (shows.length > 0) return;
+        else dispatch(actions.initTvShows());
+    });
+
+    let show = <Spinner>Loading...</Spinner>;
+    let episodes = null;
+    if (!tvShowsloading) {
+        show = shows
+            .filter((show) => show.showKey === props.match.params.showKey)
+            .map((show) => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary} />);
+        episodes = <EpisodeManager showKey={props.match.params.showKey} />;
     }
 
-    render() {
-        let show = <Spinner>Loading...</Spinner>;
-        let episodes = null;
-        if (!this.props.tvShowsloading) {
-            show = (
-                this.props.shows
-                    .filter(show => show.showKey === this.props.match.params.showKey)
-                    .map(show => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary} />))
-            episodes = <EpisodeManager showKey={this.props.match.params.showKey} />
-        }
-
-        return (
-            <Container>
-                {show}
-                {episodes}
-            </Container>
-        )
-    }
-}
+    return (
+        <Container>
+            {show}
+            {episodes}
+        </Container>
+    );
+};
 
 FullTvShowManager.propTypes = {
     onFetchTvShows: PropTypes.func,
     tvShowsloading: PropTypes.bool,
-    shows: PropTypes.arrayOf(PropTypes.shape({
-        showKey: PropTypes.string,
-        showName: PropTypes.string,
-        thumbnailUrl: PropTypes.string,
-        summary: PropTypes.string
-    }))
-}
-
-const mapStateToProps = state => {
-    return {
-        shows: state.tvShows.shows,
-        tvShowsloading: state.tvShows.loading
-    };
+    shows: PropTypes.arrayOf(
+        PropTypes.shape({
+            showKey: PropTypes.string,
+            showName: PropTypes.string,
+            thumbnailUrl: PropTypes.string,
+            summary: PropTypes.string,
+        })
+    ),
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchTvShows: (shows, forceRefresh) => shows.length > 0 && !forceRefresh ? null : dispatch(actions.initTvShows())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FullTvShowManager);
+export default FullTvShowManager;
