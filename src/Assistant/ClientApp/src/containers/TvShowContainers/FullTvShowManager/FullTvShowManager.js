@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const FullTvShowManager = (props) => {
     const shows = useSelector((state) => state.tvShows.shows);
-    const tvShowsloading = useSelector((state) => state.tvShows.loading);
+    const tvShowsloading = useSelector((state) => state.tvShows.tvShowsLoading);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,9 +18,10 @@ const FullTvShowManager = (props) => {
 
     let show = <Spinner>Loading...</Spinner>;
     let episodes = null;
+    const encodedKey = props.match.params.showKey.replace(/\s/g, '%20');
     if (!tvShowsloading) {
         show = shows
-            .filter((show) => show.showKey === props.match.params.showKey)
+            .filter((show) => show.showKey === encodedKey)
             .map((show) => <FullTvShow key={show.showKey} header={show.showName} thumbnailUrl={show.thumbnailUrl} description={show.summary} />);
         episodes = <EpisodeManager showKey={props.match.params.showKey} />;
     }
