@@ -4,6 +4,7 @@ using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace Assistant.DataAccess
 {
@@ -21,5 +22,7 @@ namespace Assistant.DataAccess
             modelBuilder.ApplyConfiguration(new TvShowConfiguration());
             modelBuilder.ApplyConfiguration(new UserTVShowMappingConfiguration());
         }
+
+        public Task RunMigrationsAsync() => base.Database.MigrateAsync();
     }
 }

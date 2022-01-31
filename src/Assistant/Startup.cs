@@ -1,5 +1,6 @@
 using Assistant.DataAccess;
 using Assistant.Filters;
+using Assistant.Logging.Interfaces;
 using Assistant.Models.Entities;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
@@ -10,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
 
 namespace Assistant
 {
@@ -60,7 +63,7 @@ namespace Assistant
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)
         {
             if (env.IsDevelopment())
             {
@@ -100,6 +103,28 @@ namespace Assistant
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+            if (!env.IsDevelopment())
+            {
+                await RunContextMigrationsAsync(app, logger);
+            }
+        }
+
+        private static async Task RunContextMigrationsAsync(IApplicationBuilder app, ILogger logger)
+        {
+            using var serviceScope = app
+                .ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope();
+            try
+            {
+                await serviceScope.ServiceProvider
+                    .GetService<ApplicationDbContext>()
+                    .RunMigrationsAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.SubmitException(ex);
+            }
         }
     }
 }
